@@ -104,6 +104,7 @@ int main(){
     assert(check_palindrome(12322) == 0);
 */
 
+/*
 // 14.
     assert(is_prime(7) == 1);
     assert(is_prime(27) == 0);
@@ -121,6 +122,143 @@ int main(){
             count++;
         }
     }
+*/
+
+/*
+// 15.
+    unsigned int num;
+    printf("Enter the Number of Elements Required: ");
+    scanf("%d", &num);
+    sum_of_series(num);
+*/
+
+/*
+// 16.
+    assert(check_if_armstrong(153) == 1);
+    assert(check_if_armstrong(25) == 0);
+*/
+
+/*
+// 17.
+    assert(check_if_amicable(220, 284) == 1);
+    assert(check_if_amicable(284, 220) == 1);
+    assert(check_if_amicable(10, 15) == 0);
+*/
+
+/*
+// 18.
+    assert(menu_driven_calculator(7, 3, '+') == 10);
+    assert(menu_driven_calculator(7, 3, '-') == 4);
+    assert(menu_driven_calculator(7, 3, '*') == 21);
+    assert(menu_driven_calculator(17, 3, 't') == -1);
+*/
+
+/*
+// 19.
+    unsigned int shape;
+    float dimension_1, dimension_2, dimension_3;
+
+    printf("Select the Shape\n");
+    printf("1 : Cube\n");
+    printf("2 : Cuboid\n");
+    printf("3 : Sphere\n");
+    printf("4 : Cylinder\n");
+    printf("5 : Cone\n");
+    scanf("%d", &shape);
+
+    switch(shape){
+    case 1:
+        printf("Enter the Length: ");
+        scanf("%f", &dimension_1);
+        printf("Volume of Cube: %f", volume_of_cube(dimension_1));
+        break;
+    case 2:
+        printf("Enter the Length: ");
+        scanf("%f", &dimension_1);
+        printf("Enter the Breadth: ");
+        scanf("%f", &dimension_2);
+        printf("Enter the Height: ");
+        scanf("%f", &dimension_3);
+        printf("Volume of Cuboid: %f", volume_of_cuboid(dimension_1, dimension_2, dimension_3));
+        break;
+    case 3:
+        printf("Enter the Radius: ");
+        scanf("%f", &dimension_1);
+        printf("Volume of Sphere: %f", volume_of_sphere(dimension_1));
+        break;
+    case 4:
+        printf("Enter the Radius: ");
+        scanf("%f", &dimension_1);
+        printf("Enter the Height: ");
+        scanf("%f", &dimension_2);
+        printf("Volume of Cylinder: %f", volume_of_cylinder(dimension_1, dimension_2));
+        break;
+    case 5:
+        printf("Enter the Radius: ");
+        scanf("%f", &dimension_1);
+        printf("Enter the Height: ");
+        scanf("%f", &dimension_2);
+        printf("Volume of Cone: %f", volume_of_cone(dimension_1, dimension_2));
+        break;
+    default:
+        printf("\nInvalid Option Selected");
+    }
+*/
+
+/*
+// 20.
+    float units;
+    printf("Enter Electricity Consumed in Units: ");
+    scanf("%f", &units);
+    printf("Electricity Bill in Rupees: %.2f", electricity_bill(units));
+*/
+
+/*
+// 21.
+    // Binary to Decimal Conversion
+    assert(bin_2_dec(1011) == 11);
+    assert(bin_2_dec(10110010) == 178);
+    assert(bin_2_dec(1111) == 15);
+    assert(bin_2_dec(00) == 0);
+    assert(bin_2_dec(1) == 1);
+
+    // Decimal to Binary Conversion
+    assert(dec_2_bin(5) == 101);
+    assert(dec_2_bin(0) == 0);
+    assert(dec_2_bin(1) == 1);
+    assert(dec_2_bin(11) == 1011);
+    assert(dec_2_bin(47) == 101111);
+*/
+
+/*
+// 22. Pending
+    unsigned int num;
+    printf("Enter the Number of Elements Required: ");
+    scanf("%d", &num);
+*/
+
+/*
+// 23. Pending
+    unsigned int num;
+    printf("Enter the Number of Elements Required: ");
+    scanf("%d", &num);
+    print_pattern_1(num);
+*/
+
+/*
+// 27.
+    assert(factorial(5) == 120);
+    assert(factorial(8) == 40320);
+*/
+
+/*
+// 33.
+    int x = 10, y = 25;
+    swap_by_ref(&x, &y);
+    assert(x == 25 && y == 10);
+    swap_by_ref(&x, &y);
+    assert(x == 10 && y == 25);
+*/
 
     return 0;
 }

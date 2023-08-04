@@ -127,3 +127,176 @@ unsigned int is_prime(unsigned int num){
 
     return 1;
 }
+
+/*
+// 15.
+unsigned int sum_of_series(unsigned int num){
+    unsigned int count = 1, sum = 0;
+
+    for(int i=1; i<=num; i++){
+        printf("%d ", count);
+        if(i < num){
+            printf("+ ");
+        }
+        sum = sum + count; // Calculate sum
+        count = (count*10)+1; // 1, 11, 111, 1111
+    }
+    printf("= %d", sum);
+    return 0;
+}
+*/
+
+// 16.
+unsigned int check_if_armstrong(unsigned int num){
+    unsigned long int sum_of_cubes = 0;
+    unsigned int rem, temp = num;
+
+    while(temp > 0){
+        rem = temp % 10;
+        temp = temp / 10;
+        sum_of_cubes += rem * rem * rem;
+    }
+
+    // Return 1 if number is Armstrong number
+    return (num == sum_of_cubes);
+}
+
+// 17.
+unsigned int check_if_amicable(unsigned int num_1, unsigned int num_2){
+    unsigned int sum_1 = 0, sum_2 = 0;
+
+    for(int i=1; i<= num_1/2; i++){
+        if(num_1%i == 0){
+            sum_1 = sum_1 + i;
+        }
+    }
+
+    for(int j=1; j<= num_2/2; j++){
+        if(num_2%j == 0){
+            sum_2 = sum_2 + j;
+        }
+    }
+
+    if((num_1 == sum_2) && (num_2 == sum_1)){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+// 18.
+unsigned int menu_driven_calculator(unsigned int num_1, unsigned int num_2, char operation){
+    switch(operation){
+    case '+':
+        return num_1 + num_2;
+        break;
+    case '-':
+        return num_1 - num_2;
+        break;
+    case '*':
+        return num_1 * num_2;
+        break;
+    default :
+        return -1;
+        break;
+    }
+}
+
+// 19.
+float volume_of_cube(float length){
+    return length * length * length;
+}
+
+float volume_of_cuboid(float length, float breadth, float height){
+    return length * breadth * height;
+}
+
+float volume_of_sphere(float radius){
+    return 4.188* radius * radius * radius; // 4/3 * Pi * r^3
+}
+
+float volume_of_cylinder(float radius, float height){
+    return 3.14 * radius * radius * height;
+}
+
+float volume_of_cone(float radius, float height){
+    return (3.14 * radius * radius * height)/3;
+}
+
+// 20.
+float electricity_bill(float units_consumed){
+    float rem, amount = 0;
+
+    if(units_consumed > 300){
+        rem = units_consumed - 300;
+        units_consumed = 300;
+        amount += rem * 10;
+    }
+    if(units_consumed > 200){
+        rem = units_consumed - 200;
+        units_consumed = 200;
+        amount += rem * 7;
+    }
+    if(units_consumed >= 0){
+        amount += units_consumed * 5;
+    }
+
+    return amount;
+}
+
+// 21.
+unsigned int bin_2_dec(unsigned long int num){
+    unsigned int rem, dec = 0, pow = 1; // 2^0 = 1
+
+    while(num > 0){
+        rem = num % 10; // Get the LSB Digit
+        num = num/10;   // Neglect the LSB Digit
+        dec += rem * pow;
+        pow = pow * 2;  // 2^1 = 2, 2^2 = 4, 2^3 = 8 ...
+    }
+
+    return dec;
+}
+
+unsigned long int dec_2_bin(unsigned int num){
+    unsigned int rem, bin = 0;
+    while(num > 0){
+        rem = num % 2;
+        num = num / 2;
+        bin = bin*10 + rem;
+    }
+
+    // Actual Binary number is reverse of the result
+    return reverse_of_num(bin);
+}
+
+// 22.
+
+
+// 23.
+void print_pattern_1(int n){
+    for(int i=0; i<n; i++){
+        for(int j=n; j>i; j--){
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+
+// 24.
+
+// 27.
+int factorial(int num){
+    if(num == 1)
+        return 1;
+    else
+        return num * factorial(num-1);
+}
+
+// 33.
+void swap_by_ref(int *ptr_1, int *ptr_2){
+    int temp = *ptr_1;
+    *ptr_1 = *ptr_2;
+    *ptr_2 = temp;
+}
