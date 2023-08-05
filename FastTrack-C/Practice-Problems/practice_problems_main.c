@@ -155,54 +155,7 @@ int main(){
 
 /*
 // 19.
-    unsigned int shape;
-    float dimension_1, dimension_2, dimension_3;
-
-    printf("Select the Shape\n");
-    printf("1 : Cube\n");
-    printf("2 : Cuboid\n");
-    printf("3 : Sphere\n");
-    printf("4 : Cylinder\n");
-    printf("5 : Cone\n");
-    scanf("%d", &shape);
-
-    switch(shape){
-    case 1:
-        printf("Enter the Length: ");
-        scanf("%f", &dimension_1);
-        printf("Volume of Cube: %f", volume_of_cube(dimension_1));
-        break;
-    case 2:
-        printf("Enter the Length: ");
-        scanf("%f", &dimension_1);
-        printf("Enter the Breadth: ");
-        scanf("%f", &dimension_2);
-        printf("Enter the Height: ");
-        scanf("%f", &dimension_3);
-        printf("Volume of Cuboid: %f", volume_of_cuboid(dimension_1, dimension_2, dimension_3));
-        break;
-    case 3:
-        printf("Enter the Radius: ");
-        scanf("%f", &dimension_1);
-        printf("Volume of Sphere: %f", volume_of_sphere(dimension_1));
-        break;
-    case 4:
-        printf("Enter the Radius: ");
-        scanf("%f", &dimension_1);
-        printf("Enter the Height: ");
-        scanf("%f", &dimension_2);
-        printf("Volume of Cylinder: %f", volume_of_cylinder(dimension_1, dimension_2));
-        break;
-    case 5:
-        printf("Enter the Radius: ");
-        scanf("%f", &dimension_1);
-        printf("Enter the Height: ");
-        scanf("%f", &dimension_2);
-        printf("Volume of Cone: %f", volume_of_cone(dimension_1, dimension_2));
-        break;
-    default:
-        printf("\nInvalid Option Selected");
-    }
+    main_menu();
 */
 
 /*
@@ -231,14 +184,20 @@ int main(){
 */
 
 /*
-// 22. Pending
-    unsigned int num;
+// 22.
+    #define SIZE 100
+    int num;
+    int arr[SIZE] = {0, 0, 1};
     printf("Enter the Number of Elements Required: ");
     scanf("%d", &num);
+    generate_series(arr, num);
+    for(int i=0; i<num; i++){
+        printf("%d ", arr[i]);
+    }
 */
 
 /*
-// 23. Pending
+// 23.
     unsigned int num;
     printf("Enter the Number of Elements Required: ");
     scanf("%d", &num);
@@ -246,9 +205,61 @@ int main(){
 */
 
 /*
+// 24.
+    unsigned int num;
+    printf("Enter the Number of Elements Required: ");
+    scanf("%d", &num);
+    print_pattern_2(num);
+*/
+
+/*
+// 25.
+    generate_series_2();
+*/
+
+/*
+// 26.
+    assert(power(2, 5) == 32);
+    assert(power(5, 3) == 125);
+    assert(power(2, 12) == 4096);
+    assert(power(7, 4) == 2401);
+*/
+
+/*
 // 27.
     assert(factorial(5) == 120);
     assert(factorial(8) == 40320);
+*/
+
+// 28.
+    printf("%f", series_evaluation(3, 3));
+
+/*
+// 29.
+    assert(CONCATENATE(56, 2) == 562);
+    assert(CONCATENATE(45, 763) == 45763);
+*/
+
+/*
+// 30.
+    assert(SQUARE(7) == 49);
+    assert(SQUARE(9) == 81);
+*/
+
+/*
+// 31.
+    main_menu_math_operations();
+*/
+
+/*
+// 32.
+    #define SIZE  5
+    int arr[SIZE] = {34, 13, 65, 8, 9};
+    print_int_array(arr, SIZE);
+    ascending_sort(arr, SIZE);
+    print_int_array(arr, SIZE);
+    descending_sort(arr, SIZE);
+    print_int_array(arr, SIZE);
 */
 
 /*

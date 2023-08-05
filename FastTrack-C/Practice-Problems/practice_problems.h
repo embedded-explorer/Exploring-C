@@ -74,6 +74,7 @@ float volume_of_cuboid(float length, float breadth, float height);
 float volume_of_sphere(float radius);
 float volume_of_cylinder(float radius, float height);
 float volume_of_cone(float radius, float height);
+void main_menu(void);
 
 // 20. An Electricity board charges the following rates for use of electricity.
 // For the First 200 units : Rs 5 per unit
@@ -88,7 +89,7 @@ unsigned long int dec_2_bin(unsigned int num);
 
 // 22. Generate a sequence of numbers such that every number in the sequence is the sum of
 // the previous three numbers. The first three numbers are 0,0,1.
-int generate_series(int num_1, int num_2, int num_3);
+int generate_series(int arr[], int size);
 
 // 23. WAP to print the following sketch with input N as number of rows
 // ****
@@ -102,32 +103,43 @@ void print_pattern_1(int n);
 // **
 // ***
 // ****
+void print_pattern_2(int n);
 
 // 25. Write a C program, which will print two digit numbers whose sum of both digit is
 // nine. e.g. 18,27,36......
+void generate_series_2(void);
 
 // 26. Write a recursive function for calculating power of a number. Take base number and
 // exponent from user.
+int power(int base, int exponent);
 
 // 27. Write a recursive function for calculating factorial of a number.
 int factorial(int num);
 
 // 28. Use recursive calls to evaluate F(x) = x + x3/3! + x5/5! + x7/7!+ …
+float series_evaluation(int x, int n);
 
 // 29. Concatenate two integer values using macros
+#define CONCATENATE(X, Y) X##Y
 
 // 30. Find square of a number using macros.
+#define SQUARE(X) X*X
 
 // 31. Write a menu driven program to display the mathematical functions like square root,
 // natural log, log10x, power(x,n), Cos(x). (use math.h)
+// Using Functions from math.h
+void main_menu_math_operations(void);
 
 // 32. WAP to sort the given array in ascending and descending order.
+// Function to print integer array
+int print_int_array(int arr[], int arr_size);
+int ascending_sort(int arr[], int arr_size);
+int descending_sort(int arr[], int arr_size);
 
 // 33. Write a program to swap two numbers using function.
 void swap_by_ref(int *ptr_1, int *ptr_2);
 
-// 34. WAP to find minimum and maximum elements in a given array using the function int
-// find_max_min(int array[], int size, int *max, int *min);
+// 34. WAP to find minimum and maximum elements in a given array using the function
 
 // 35. Write a C program that take 2 integer sets A[] and B[] as input and prints results of
 // following set operations:

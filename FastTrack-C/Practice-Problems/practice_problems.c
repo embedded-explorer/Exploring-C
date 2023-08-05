@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <math.h>
+
 // 1.
 char upper_to_lower(char ch){
     if(ch >= 'A' && ch <= 'Z')
@@ -128,7 +131,6 @@ unsigned int is_prime(unsigned int num){
     return 1;
 }
 
-/*
 // 15.
 unsigned int sum_of_series(unsigned int num){
     unsigned int count = 1, sum = 0;
@@ -144,7 +146,6 @@ unsigned int sum_of_series(unsigned int num){
     printf("= %d", sum);
     return 0;
 }
-*/
 
 // 16.
 unsigned int check_if_armstrong(unsigned int num){
@@ -224,6 +225,57 @@ float volume_of_cone(float radius, float height){
     return (3.14 * radius * radius * height)/3;
 }
 
+void main_menu(void){
+    unsigned int shape;
+    float dimension_1, dimension_2, dimension_3;
+
+    printf("Select the Shape\n");
+    printf("1 : Cube\n");
+    printf("2 : Cuboid\n");
+    printf("3 : Sphere\n");
+    printf("4 : Cylinder\n");
+    printf("5 : Cone\n");
+    scanf("%d", &shape);
+
+    switch(shape){
+    case 1:
+        printf("Enter the Length: ");
+        scanf("%f", &dimension_1);
+        printf("Volume of Cube: %f", volume_of_cube(dimension_1));
+        break;
+    case 2:
+        printf("Enter the Length: ");
+        scanf("%f", &dimension_1);
+        printf("Enter the Breadth: ");
+        scanf("%f", &dimension_2);
+        printf("Enter the Height: ");
+        scanf("%f", &dimension_3);
+        printf("Volume of Cuboid: %f", volume_of_cuboid(dimension_1, dimension_2, dimension_3));
+        break;
+    case 3:
+        printf("Enter the Radius: ");
+        scanf("%f", &dimension_1);
+        printf("Volume of Sphere: %f", volume_of_sphere(dimension_1));
+        break;
+    case 4:
+        printf("Enter the Radius: ");
+        scanf("%f", &dimension_1);
+        printf("Enter the Height: ");
+        scanf("%f", &dimension_2);
+        printf("Volume of Cylinder: %f", volume_of_cylinder(dimension_1, dimension_2));
+        break;
+    case 5:
+        printf("Enter the Radius: ");
+        scanf("%f", &dimension_1);
+        printf("Enter the Height: ");
+        scanf("%f", &dimension_2);
+        printf("Volume of Cone: %f", volume_of_cone(dimension_1, dimension_2));
+        break;
+    default:
+        printf("\nInvalid Option Selected");
+    }
+}
+
 // 20.
 float electricity_bill(float units_consumed){
     float rem, amount = 0;
@@ -272,7 +324,12 @@ unsigned long int dec_2_bin(unsigned int num){
 }
 
 // 22.
-
+int generate_series(int arr[], int size){
+    for(int i=0; i<size-3; i++){
+        arr[i+3] = arr[i+0] + arr[i+1] + arr[i+2];
+    }
+    return 1; // Operation Success
+}
 
 // 23.
 void print_pattern_1(int n){
@@ -285,6 +342,38 @@ void print_pattern_1(int n){
 }
 
 // 24.
+void print_pattern_2(int n){
+    int count=0;
+
+    for(int i=0; i<n; ){
+
+        if(count <= i){
+            printf("*");
+            count++;
+        }
+
+        if(count > i){
+            printf("\n");
+            count = 0;
+            i++;
+        }
+    }
+}
+
+// 25.
+void generate_series_2(void){
+    for(int i=1; i<9; i++){
+        printf("%d%d ", i, 9-i);
+    }
+}
+
+// 26.
+int power(int base, int exponent){
+    if(exponent == 1)
+        return base;
+    else
+        return base * power(base, (exponent-1));
+}
 
 // 27.
 int factorial(int num){
@@ -292,6 +381,114 @@ int factorial(int num){
         return 1;
     else
         return num * factorial(num-1);
+}
+
+// 28. F(x) = x + x3/3! + x5/5! + x7/7!+ …
+float series_evaluation(int x, int n){
+    float sum = 0;
+
+    sum = sum + ((power (x, ((2*n)-1))) / factorial((2*n)-1));
+
+    if(n == 1){
+        return x;
+    }
+
+    else{
+        return sum + series_evaluation(x, n-1);
+    }
+}
+
+// 29.
+// Macro defined in .h file
+
+// 30.
+// Macro defined in .h file
+
+// 31.
+// Using Functions from math.h
+void main_menu_math_operations(void){
+    int operation;
+    float x, n;
+
+    printf("Select the Required Operation\n");
+    printf("1 : Natural Log(x)\n");
+    printf("2 : Log10(x)\n");
+    printf("3 : Power(x, n)\n");
+    printf("4 : Sin(x)\n");
+    printf("5 : Cos(x)\n");
+    scanf("%d", &operation);
+
+    switch(operation){
+    case 1:
+        printf("Enter x: ");
+        scanf("%f", &x);
+        printf("Natural Log(%f) = %f", x, log(x));
+        break;
+    case 2:
+        printf("Enter x: ");
+        scanf("%f", &x);
+        printf("Log10(%f) = %f", x, log10(x));
+        break;
+    case 3:
+        printf("Enter x: ");
+        scanf("%f", &x);
+        printf("Enter n: ");
+        scanf("%f", &n);
+        printf("(%f)^(%f) = %f", x, n, pow(x, n));
+        break;
+    case 4:
+        printf("Enter x: ");
+        scanf("%f", &x);
+        printf("Sin(%f) = %f", x, sin(x));
+        break;
+    case 5:
+        printf("Enter x: ");
+        scanf("%f", &x);
+        printf("Cos(%f) = %f", x, cos(x));
+        break;
+    default:
+        printf("\nInvalid Option Selected");
+    }
+}
+
+// 32.
+// Function to print integer array
+int print_int_array(int arr[], int arr_size){
+    for(int i=0; i<arr_size; i++){
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    return 1; // Operation Successful
+}
+
+int ascending_sort(int arr[], int arr_size){
+    int temp;
+
+    for(int i=0; i<arr_size; i++){
+        for(int j=i+1; j<arr_size; j++){
+            if(arr[i] > arr[j]){
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    return 1; // Return Success
+}
+
+int descending_sort(int arr[], int arr_size){
+    int temp;
+
+    for(int i=0; i<arr_size; i++){
+        for(int j=i+1; j<arr_size; j++){
+            if(arr[i] < arr[j]){
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    return 1; // Return Success
 }
 
 // 33.
