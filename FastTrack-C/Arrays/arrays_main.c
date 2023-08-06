@@ -87,6 +87,7 @@ int main(){
     assert(min == 1);
 */
 
+/*
     // Find Intersection of two arrays
     #define A_SIZE  8
     #define B_SIZE  10
@@ -100,6 +101,17 @@ int main(){
     print_int_array(arr_a, A_SIZE);
     print_int_array(arr_b, B_SIZE);
     print_int_array(arr_c, c_size);
+*/
+
+    int arr[ROW][COL] = {0};
+    int max;
+
+    display_data(ROW, COL, arr);
+    insert_data(ROW, COL, arr); // Insert Random Data
+    display_data(ROW, COL, arr);
+
+    assert(return_max_sum_col(ROW, COL, arr, &max) == 0); // Column number is 0
+    assert(max == 103); // Sum of column elements is 103
 
     return 0;
 }

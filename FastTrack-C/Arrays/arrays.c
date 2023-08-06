@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 // Function to print integer array
 int print_int_array(int arr[], int arr_size){
@@ -144,4 +145,50 @@ int intersection_set(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c
 
 // Concatenate two arrays
 int concantenate_array(int src[], int size_src, int tgt[], int size_tgt){
+    return 0;
+}
+
+// Insert data in to 2D Array
+void insert_data(int row, int col, int arr[row][col]){
+    int i, j;
+
+    for(i=0; i<row; i++){
+        for(j=0; j<col; j++){
+            arr[i][j] = rand()%50;
+        }
+    }
+}
+
+// Print data of 2D Array
+void display_data(int row, int col, int arr[row][col]){
+    int i, j;
+
+    for(i=0; i<row; i++){
+        for(j=0; j<col; j++){
+            printf(" %d ",arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+// Get Maximum Column sum of 2D Array
+int return_max_sum_col(int row, int col, int arr[row][col], int *max){
+    int i, j, sum, col_no;
+    *max = -1;
+
+    if(row <= 0 || col <=0)
+        return -1; // Operation Unsuccessful
+
+    for(i=0; i<row; i++){
+        sum = 0;
+        for(j=0; j<col; j++){
+            sum += arr[j][i];
+        }
+
+        if(*max < sum){
+            *max = sum;
+            col_no = i;
+        }
+    }
+    return col_no;
 }
