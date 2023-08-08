@@ -30,6 +30,7 @@ int return_index_of_element(int arr[], int arr_size, int element);
 int max_min_array(int arr[], int arr_size, int *max, int *min);
 
 // Find Intersection of two arrays
+int intersection_array(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c);
 int intersection_set(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c);
 
 // Concatenate two arrays

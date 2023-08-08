@@ -87,7 +87,7 @@ int main(){
     assert(min == 1);
 */
 
-/*
+
     // Find Intersection of two arrays
     #define A_SIZE  8
     #define B_SIZE  10
@@ -97,12 +97,14 @@ int main(){
     int arr_c[C_SIZE] = {0};
     int c_size;
 
-    c_size = intersection_set(arr_a, A_SIZE, arr_b, B_SIZE, arr_c, C_SIZE);
+    c_size = intersection_array(arr_a, A_SIZE, arr_b, B_SIZE, arr_c, C_SIZE);
     print_int_array(arr_a, A_SIZE);
     print_int_array(arr_b, B_SIZE);
     print_int_array(arr_c, c_size);
-*/
+    printf("%d", c_size);
 
+
+/*
     int arr[ROW][COL] = {0};
     int max;
 
@@ -112,6 +114,7 @@ int main(){
 
     assert(return_max_sum_col(ROW, COL, arr, &max) == 0); // Column number is 0
     assert(max == 103); // Sum of column elements is 103
+*/
 
     return 0;
 }

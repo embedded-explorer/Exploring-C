@@ -130,6 +130,37 @@ int max_min_array(int arr[], int arr_size,int *max, int *min){
 // A[] = {1,2,3,4,2,5,4,1}
 // B[] = {1,2,1,2,3,7,4,8,9,2}
 // C[] = {1,2,3,4}
+
+// Direct Implementation
+int intersection_array(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c){
+    int count=0;
+    int already_added = 0;
+
+    for(int i=0; i< size_a; i++){
+    // For each element in array A
+        for(int j=0; j< size_b; j++){
+        // Check if element exists in array B
+            if(arr_a[i] == arr_b[j]){
+            // If element exists in array B
+                already_added = 0;
+                for(int k=0; k< count; k++){
+                // check if its already added to array C
+                    if(arr_a[i] == arr_c[k]){
+                    // Flag is made high and skip addition
+                        already_added = 1;
+                        break;
+                    }
+                }
+                if(!already_added){
+                    arr_c[count++] = arr_a[i];
+                }
+            }
+        }
+    }
+    return count; // Return size of array c
+}
+
+// Implementation by reusing search function
 int intersection_set(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c){
     int i=0, count=0;
 
