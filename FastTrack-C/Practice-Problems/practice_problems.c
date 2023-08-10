@@ -385,16 +385,12 @@ int factorial(int num){
 
 // 28. F(x) = x + x3/3! + x5/5! + x7/7!+ …
 float series_evaluation(int x, int n){
-    float sum = 0;
-
-    sum = sum + ((power (x, ((2*n)-1))) / factorial((2*n)-1));
-
     if(n == 1){
         return x;
     }
 
     else{
-        return sum + series_evaluation(x, n-1);
+        return ((((float)power (x, ((2*n)-1))) / (float)factorial((2*n)-1)) + series_evaluation(x, n-1));
     }
 }
 
@@ -406,6 +402,7 @@ float series_evaluation(int x, int n){
 
 // 31.
 // Using Functions from math.h
+/*
 void main_menu_math_operations(void){
     int operation;
     float x, n;
@@ -450,6 +447,7 @@ void main_menu_math_operations(void){
         printf("\nInvalid Option Selected");
     }
 }
+*/
 
 // 32.
 // Function to print integer array
@@ -496,4 +494,133 @@ void swap_by_ref(int *ptr_1, int *ptr_2){
     int temp = *ptr_1;
     *ptr_1 = *ptr_2;
     *ptr_2 = temp;
+}
+
+// 34.
+int min_max_array(int arr[], int arr_size, int *min, int *max){
+    if(arr_size == 0){
+        return -1; // Invalid Array Size
+    }
+
+    *min = *max = arr[0];
+
+    for(int i=1; i<arr_size; i++){
+        if(*min > arr[i]){
+            *min = arr[i];
+        }
+        if(*max < arr[i]){
+            *max = arr[i];
+        }
+    }
+    return 1; // Return Success
+}
+
+// 35.
+// I. A union B (Write function set_union())
+int set_union(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c){
+    int already_added=0;
+    int count = 0;
+
+    // Add Elements of array A to union array without repetition
+    for(int i=0; i<size_a; i++){
+        already_added = 0;
+        for(int j=0; j<count; j++){
+            if(arr_a[i] == arr_c[j]){
+                already_added = 1;
+                break;
+            }
+        }
+        if(!already_added){
+            arr_c[count++] = arr_a[i];
+        }
+    }
+
+    // Add Elements of array B to union array without repetition
+    for(int i=0; i<size_b; i++){
+        already_added = 0;
+        for(int j=0; j<count; j++){
+            if(arr_b[i] == arr_c[j]){
+                already_added = 1;
+                break;
+            }
+        }
+        if(!already_added){
+            arr_c[count++] = arr_b[i];
+        }
+    }
+
+    return count; // Return number of elements in array C
+}
+
+// II. A intersection B (Write function set_intersection())
+int set_intersection(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c){
+    int already_added=0;
+    int count = 0;
+
+    for(int i=0; i<size_a; i++){
+    // For element of array A
+        for(int j=0; j<size_b; j++){
+        // Check against each element of array B
+            if(arr_a[i] == arr_b[j]){
+            // If element is present in both array A and array B
+                already_added = 0;
+                for(int k=0; k<count; k++){
+                // Check if element is already added to array C
+                    if(arr_a[i] == arr_c[k]){
+                        already_added = 1;
+                        break;
+                    }
+                }
+                if(!already_added){
+                    arr_c[count++] = arr_a[i];
+                }
+            }
+        }
+    }
+    return count; // Return number of elements in array C
+}
+
+int set_difference(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c){
+    int is_present = 0;
+    int count = 0;
+
+    for(int i=0; i<size_a; i++){
+    // For each element of array B
+        for(int j=0; j<size_b; j++){
+        // Check if that element is present in array A
+            is_present = 0;
+            if(arr_a[i] == arr_b[j]){
+                is_present = 1;
+                break;
+            }
+        }
+        if(!is_present){
+            arr_c[count++] = arr_a[i];
+        }
+    }
+    return count;
+}
+
+// 36.
+int remove_duplicate_in_array(int arr[], int arr_size){
+    int count = arr_size;
+    int is_repeated = 0;
+    int i, j, k;
+    for(i=0; i<count; i++){
+        for(j=i+1; j<count; j++){
+            is_repeated = 0;
+            if(arr[i] == arr[j]){
+                is_repeated = 1;
+                break;
+            }
+        }
+        if(is_repeated){
+            for(k=j; k<count-1; k++){
+                arr[k] = arr[k+1];
+            }
+            count--;
+        }
+    }
+
+    return count;
 }

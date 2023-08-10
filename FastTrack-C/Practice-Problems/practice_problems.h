@@ -140,14 +140,19 @@ int descending_sort(int arr[], int arr_size);
 void swap_by_ref(int *ptr_1, int *ptr_2);
 
 // 34. WAP to find minimum and maximum elements in a given array using the function
+int min_max_array(int arr[], int arr_size, int *min, int *max);
 
 // 35. Write a C program that take 2 integer sets A[] and B[] as input and prints results of
 // following set operations:
 // I. A union B (Write function set_union())
 // II. A intersection B (Write function set_intersection())
 // III. A-B and B-A (Write function set_difference())
+int set_union(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c);
+int set_intersection(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c);
+int set_difference(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c);
 
 // 36. WAP to store 10 numbers in an array. Remove the duplicate entries in the array.
+int remove_duplicate_in_array(int arr[], int arr_size);
 
 // 37. WAP to search for a given integer in an array using the linear search technique.
 

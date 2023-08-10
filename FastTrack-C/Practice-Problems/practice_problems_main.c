@@ -231,8 +231,10 @@ int main(){
     assert(factorial(8) == 40320);
 */
 
+/*
 // 28.
     printf("%f", series_evaluation(3, 3));
+*/
 
 /*
 // 29.
@@ -270,6 +272,66 @@ int main(){
     swap_by_ref(&x, &y);
     assert(x == 10 && y == 25);
 */
+
+/*
+// 34.
+    #define SIZE 10
+    int arr[SIZE] = {34, 13, 65, 8, 9, 26, 47, 2, 9, 17};
+    int min, max;
+
+    min_max_array(arr, SIZE, &min, &max);
+    assert(min == 2);
+    assert(max == 65);
+*/
+
+/*
+// 35.
+    #define SIZE_A 10
+    #define SIZE_B 10
+    #define SIZE_C 20
+    int size_c;
+    int arr_a[SIZE_A] = {34, 13, 65, 8, 9, 26, 47, 2, 9, 17};
+    int arr_b[SIZE_B] = {43, 31, 56, 8, 9, 62, 74, 2, 9, 71};
+    int arr_c[SIZE_C] = {0};
+
+    printf("Array A:\t\t");
+    print_int_array(arr_a, SIZE_A);
+    printf("Array B:\t\t");
+    print_int_array(arr_b, SIZE_B);
+
+    size_c = set_union(arr_a, SIZE_A, arr_b, SIZE_B, arr_c, SIZE_C);
+    assert(size_c == 15);
+    printf("A Union B:\t\t");
+    print_int_array(arr_c, size_c);
+
+    size_c = set_intersection(arr_a, SIZE_A, arr_b, SIZE_B, arr_c, SIZE_C);
+    assert(size_c == 3);
+    printf("A Intersection B:\t");
+    print_int_array(arr_c, size_c);
+
+    size_c = set_difference(arr_a, SIZE_A, arr_b, SIZE_B, arr_c, SIZE_C);
+    assert(size_c == 6);
+    printf("A Minus B:\t\t");
+    print_int_array(arr_c, size_c);
+
+    size_c = set_difference(arr_b, SIZE_B, arr_a, SIZE_A, arr_c, SIZE_C);
+    assert(size_c == 6);
+    printf("B Minus A:\t\t");
+    print_int_array(arr_c, size_c);
+*/
+
+    #define SIZE 10
+    int arr[SIZE] = {0};
+    int arr_size;
+
+    for(int i=0; i<SIZE; i++){
+        arr[i] = rand() % 10;
+    }
+
+    print_int_array(arr, SIZE);
+    arr_size = remove_duplicate_in_array(arr, SIZE);
+    print_int_array(arr, SIZE);
+    printf("%d\n", arr_size);
 
     return 0;
 }
