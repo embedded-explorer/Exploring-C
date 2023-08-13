@@ -606,7 +606,7 @@ int remove_duplicate_in_array(int arr[], int arr_size){
     int count = arr_size;
     int is_repeated = 0;
     int i, j, k;
-    for(i=0; i<count; i++){
+    for(i=0; i<count-1; i++){
         for(j=i+1; j<count; j++){
             is_repeated = 0;
             if(arr[i] == arr[j]){
@@ -615,12 +615,163 @@ int remove_duplicate_in_array(int arr[], int arr_size){
             }
         }
         if(is_repeated){
-            for(k=j; k<count-1; k++){
+            for(k=j; k<=count-1; k++){
                 arr[k] = arr[k+1];
             }
             count--;
+            i--;
         }
     }
 
     return count;
+}
+
+// 37.
+int linear_search(int arr[], int arr_size, int element){
+    for(int i=0; i<arr_size; i++){
+        if(arr[i] == element){
+            return i; // Return Element Index
+        }
+    }
+    return -1; // Return Element not Found
+}
+
+// 38.
+
+// 39.
+int sum_of_product(int arr[], int arr_size){
+    int sop = 0;
+
+    for(int i=0; i<arr_size-1; i++){
+        sop += arr[i] * arr[i+1];
+    }
+
+    return sop;
+}
+
+// 40.
+int find_string_length(char str[]){
+    int length = 0;
+
+    while(str[length] != '\0'){
+        length++;
+    }
+
+    return length;
+}
+
+// 41.
+void string_concat(char dest[], char src[]){
+    int dest_len;
+
+}
+
+void string_copy(char dest[], char src[]){
+    int i=0;
+    while(src[i] != '\0'){
+        dest[i] = src[i];
+        i++;
+    }
+    dest[i] = '\0';
+}
+
+void worded_date(int day, int month, int year, char str[]){
+
+    char date = (char)day;
+    char date_ext[3];
+
+    switch(day){
+    case 1:
+    case 21:
+    case 31:
+        string_copy(date_ext, "st");
+        break;
+    case 2:
+    case 22:
+        string_copy(date_ext, "nd");
+        break;
+    case 3:
+    case 23:
+        string_copy(date_ext, "rd");
+        break;
+    default:
+        string_copy(date_ext, "th");
+        break;
+    }
+
+    string_copy(str, &date);
+
+    printf("%s", str);
+
+/*
+    switch(month){
+    case 1:
+        str[]
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    default:
+        break;
+    }
+*/
+}
+
+// 42.
+void lower_to_upper(char str[]){
+    int i=0;
+
+    while(str[i] != '\0'){
+        if(str[i] >= 'a' && str[i] <= 'z'){
+            str[i] -= 32;
+        }
+        i++;
+    }
+}
+
+// 43.
+void reverse_string(char str[]){
+    int str_len = find_string_length(str)-1;
+    int len = str_len/2;
+    char temp;
+
+    for(int i=0; i<=len; i++){
+        temp = str[i];
+        str[i] = str[str_len - i];
+        str[str_len - i] = temp;
+    }
+}
+
+// 44.
+int string_palindrome(char *str){
+    int str_len = find_string_length(str)-1;
+    int i = 0;
+
+    while(i <= str_len){
+    // Using != in while loop will not work for even length palindrome
+        if(str[i] != str[str_len]){
+            return 0; // Not a palindrome
+        }
+        i++;
+        str_len--;
+    }
+    return 1; // palindrome
+}
+
+// 50.
+Student_Array initialize_array(int t_size){
+    Student_Array my_arr;
+    my_arr.c_size = 0;
+    my_arr.t_size = size > 0 && size <= MAX_SIZE ? size : MAX_SIZE;
+    return my_arr;
+}
+
+int store_data(Student std, Student std_data){
 }

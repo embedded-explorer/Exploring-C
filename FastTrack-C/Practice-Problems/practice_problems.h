@@ -155,27 +155,37 @@ int set_difference(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[]
 int remove_duplicate_in_array(int arr[], int arr_size);
 
 // 37. WAP to search for a given integer in an array using the linear search technique.
+int linear_search(int arr[], int arr_size, int element);
 
 // 38. WAP to search for a given integer in an array using the binary search technique
+int binary_search(int arr[], int arr_size, int element);
 
 // 39. Write a C program, that reads list of n integer and print sum of product of consecutive
 // numbers. if n=7 and numbers are 4,5,2,5,6,4,7 then output is
 // 4*5+5*2+2*5+5*6+6*4+4*7 = 122.
+int sum_of_product(int arr[], int arr_size);
 
 // 40. WAP to read a string from the user and find the length of string.( Note: Do not use
 // string.h header file)
+int find_string_length(char str[]);
 
 // 41. Input date, month and year from the user, and using switch case, display in
 // worded format. e.g. input: d=16, m=7, y=1992
 // Output: 16th July, 1992
+void string_copy(char dest[], char src[]);
+void string_concat(char dest[], char src[]);
+void worded_date(int day, int month, int year, char str[]);
 
 // 42. Write a function that will scan a character string passed as an argument and convert
 // all lower-case characters into their upper-case equivalents.
+void lower_to_upper(char str[]);
 
 // 43. Write a program to read a string from the user and reverse the string.( Note: Do not
 // use string.h header file)
+void reverse_string(char str[]);
 
 // 44. Write a program to check whether the given input string is palindrome.
+int string_palindrome(char *str);
 
 // 45. Write a program to concatenate two stings. .( Note: Do not use string.h header file)
 
@@ -192,6 +202,29 @@ int remove_duplicate_in_array(int arr[], int arr_size);
 
 // 50. Write a program to store and print the roll no., name, age and marks of 10 students
 // using structures.
+#define NAME_SIZE 20
+#define MAX_SIZE  10
+
+struct _student_{
+    int roll_no;
+    char name[NAME_SIZE];
+    int age;
+    float marks;
+};
+typedef struct _student_ Student;
+
+struct _student_array_{
+    Student std[MAX_SIZE];
+    int c_size;
+    int t_size;
+};
+typedef struct _student_array_ Student_Array;
+
+// Function to Initialize Array
+Student_Array initialize_array(int t_size);
+
+// Function to store data in to array
+int store_data(Student std, Student std_data);
 
 // 51. Write a program to add, subtract and multiply two complex numbers using structures.
 

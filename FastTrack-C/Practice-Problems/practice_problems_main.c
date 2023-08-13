@@ -320,6 +320,8 @@ int main(){
     print_int_array(arr_c, size_c);
 */
 
+/*
+// 36.
     #define SIZE 10
     int arr[SIZE] = {0};
     int arr_size;
@@ -330,8 +332,90 @@ int main(){
 
     print_int_array(arr, SIZE);
     arr_size = remove_duplicate_in_array(arr, SIZE);
+    print_int_array(arr, arr_size);
+    assert(arr_size == 7);
+*/
+
+/*
+// 37.
+    #define SIZE 10
+    int arr[SIZE] = {0};
+
+    for(int i=0; i<SIZE; i++){
+        arr[i] = rand() % 10;
+    }
+
     print_int_array(arr, SIZE);
-    printf("%d\n", arr_size);
+    assert(linear_search(arr, SIZE, 4) == 2);
+    assert(linear_search(arr, SIZE, 6) == -1);
+*/
+
+/*
+    // 38.
+*/
+
+/*
+// 39.
+    #define SIZE 7
+    int arr[SIZE] = {4, 5, 2, 5, 6, 4, 7};
+
+    assert(sum_of_product(arr, SIZE) == 122);
+*/
+
+/*
+// 40.
+    #define SIZE 100
+    char str[SIZE] = "FAST-TRACK C";
+
+    assert(find_string_length(str) == 12);
+*/
+
+/*
+// 41.
+    #define SIZE 100
+    char str[SIZE];
+
+    worded_date(16, 7, 1992, str);
+*/
+
+/*
+// 42.
+    #define SIZE 100
+    char str[SIZE] = "Fast-Track C";
+
+    printf("%s\n", str);
+    lower_to_upper(str);
+    printf("%s\n", str);
+*/
+
+/*
+// 43.
+    #define SIZE 100
+    char str[SIZE] = "Fast-Track C";
+    printf("%s\n", str);
+    reverse_string(str);
+    printf("%s\n", str);
+*/
+
+/*
+// 44.
+    assert(string_palindrome("Fast-Track C") == 0);
+    assert(string_palindrome("HiH") == 1);
+    assert(string_palindrome("HiiH") == 1);
+*/
+
+
+
+
+
+
+
+
+// 50.
+    Student_Array std_arr;
+
+    std_arr = initialize_array(10);
 
     return 0;
 }
+
