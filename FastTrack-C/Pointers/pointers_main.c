@@ -52,8 +52,11 @@ int main(){
     }
 */
 
+/*
+// Dynamic Structure
     Earray *test;
     Employee data = {1001, "Joel", 30000};
+	
     test = initialize_employee(5);
     assert(insert_employee_data(test, data));
     assert(test->arr->emp_id == 1001);
@@ -61,126 +64,54 @@ int main(){
     data.emp_id = 1002;
     data.emp_salary = 25000;
     strcpy(data.emp_name, "Siya");
+	
     assert(insert_employee_data(test, data));
     assert((test->arr + 1)->emp_id == 1002);
+	assert(search_by_name(test, "Siya") == 1);
     assert(search_by_name(test, "Siyan") == 0);
-
-    return 0;
-}
-
-/*
-#include<assert.h>
-#include<stdlib.h>
-
-#include "array.h"
-
-void test_merge_array();
-
-int main()
-{
-    Array *test_ptr, *arr_one, *arr_two;
-
-    test_ptr = initialize_array(5);
-    arr_one = initialize_array(10);
-    arr_two = initialize_array(15);
-
-    assert(test_ptr != NULL);
-    assert(test_ptr->c_size == 0 && test_ptr->t_size == 5);
-    assert(test_ptr->arr != NULL);
-
-    assert(insert_data(test_ptr, 10) == SUCCESS);
-    assert(insert_data(test_ptr, 30) == SUCCESS);
-    assert(insert_data(test_ptr, 40) == SUCCESS);
-    assert(insert_data(test_ptr, 20) == SUCCESS);
-    assert(insert_data(test_ptr, 60) == SUCCESS);
-
-    assert(test_ptr->c_size == 5);
-    assert(insert_data(test_ptr, 100) == FULL);
-
-    assert(search(test_ptr, 60) == FOUND);
-    assert(search(test_ptr, 20) == FOUND);
-    assert(search(test_ptr, 40) == FOUND);
-
-    assert(search(test_ptr, 100) == FAIL);
-
-    test_ptr = deallocate(test_ptr);
-    assert(test_ptr == NULL);
-
-
-    //testing for merge array
-    test_merge_array();
-
-    return 0;
-}
-
-
-void test_merge_array()
-{
-    Array *arr_one, *arr_two;
-
-    arr_one = initialize_array(10);
-    arr_two = initialize_array(15);
-
-    assert(insert_data(arr_one, 10));
-    assert(insert_data(arr_one, 30));
-    assert(insert_data(arr_one, 20));
-    assert(insert_data(arr_one, 50));
-    assert(insert_data(arr_one, 20));
-    assert(insert_data(arr_one, 60));
-    assert(insert_data(arr_one, 10));
-
-    assert(arr_one->c_size == 7);
-
-
-    assert(insert_data(arr_two, 90));
-    assert(insert_data(arr_two, 90));
-    assert(insert_data(arr_two, 90));
-    assert(insert_data(arr_two, 90));
-    assert(insert_data(arr_two, 30));
-    assert(insert_data(arr_two, 90));
-    assert(insert_data(arr_two, 50));
-    assert(insert_data(arr_two, 90));
-    assert(insert_data(arr_two, 10));
-    assert(insert_data(arr_two, 80));
-
-    assert(arr_two->c_size == 10);
-
-    arr_two = merge_array(arr_one, arr_two);
-
-    assert(arr_one->c_size == 17);
-    assert(arr_one->t_size == 17);
-    assert(arr_two == NULL);
-
-    deallocate(arr_one);
-
-
-}
-
-#include <assert.h>
-#include <stdlib.h>
-#include "pointer.h"
-
-int main()
-{
-    int *test, *dummy, **arr;
-    Maxmin res;
-
-    test = insert_dynamic_array(10);
-    dummy = insert_dynamic_array(20);
-
-    assert(*(test+7) == 8);
-    res = max_min(test, 10, res);
-
-    assert(res.max == 10);
-    assert(res.min == 1);
-
-    test = create_two_dimension_single_ptr(4,5);
-    display(test,4,5);
-
-    arr = insert_two_dimension_array(4,6);
-    display_two_dimension(arr, 4,6);
-
-    return 0;
-}
-
 */
+
+// Dynamic Array List Merge
+    Array *arr_one, *arr_two;
+	
+	arr_one = initialize_array(10);
+    arr_two = initialize_array(15);
+	
+	assert(arr_one != NULL);
+	assert(arr_one->c_size == 0 && arr_one->t_size == 10);
+    assert(arr_one->arr != NULL);
+	
+	assert(arr_two != NULL);
+	assert(arr_two->c_size == 0 && arr_two->t_size == 15);
+    assert(arr_two->arr != NULL);
+	
+	// Insert data to array one
+	for(int i=0; i<10; i++){
+		assert(insert_data(arr_one, 10*i) == SUCCESS);
+	}
+	assert(arr_one->c_size == 10);
+	assert(search(arr_one, 60) == SUCCESS);
+	assert(search(arr_one, 160) == FAILURE);
+	
+	// Insert data to array two
+	for(int i=0; i<12; i++){
+		assert(insert_data(arr_two, 10+i) == SUCCESS);
+	}
+	assert(arr_two->c_size == 12);
+	assert(search(arr_two, 16) == SUCCESS);
+	
+	// Testing merge array
+	arr_two = merge_array(arr_one, arr_two);
+	assert(arr_one->c_size == 22);
+    assert(arr_one->t_size == 22);
+    assert(arr_two == NULL);
+	
+	// Testing split array
+    arr_two = split_array(arr_one, 8);
+	assert(arr_one->c_size == 8);
+	assert(arr_two->c_size == 14);
+	assert(arr_two->t_size == 14);
+
+	
+    return 0;
+}

@@ -10,11 +10,14 @@ void display(int *arr, int row, int col);
 // create a dynamic 2D array, return double pointer storing array address
 // Create 2D array using double pointer
 int ** create_matrix(int row, int col);
+
 // Insert data into dynamic 2D array using double pointers
 int ** insert_double_pointer(int row, int col);
+
 // Function to display dynamic 2D array using double pointers
 void display_double_ptr(int **arr, int row, int col);
 
+/*
 // Dynamic Structure
 #define NAME_SIZE 15
 
@@ -40,6 +43,8 @@ int insert_employee_data(Earray *my_arr, Employee data);
 
 // Function to search employee by name
 int search_by_name(Earray *my_arr, char *element);
+*/
+
 
 // Dynamic Array List Merge
 #define FAILURE 0
@@ -55,35 +60,16 @@ typedef struct _array_ Array;
 Array * initialize_array(int size);
 
 // Insert data into array within structure array
-int insert_data(Array *my_arr, int);
+int insert_data(Array *my_arr, int data);
 
-int search(Array *, int);
-Array * deallocate(Array *);
+// Search element within array
+int search(Array *my_arr, int element);
 
-Array * merge_array(Array *, Array *);
+// Deallocate memory allocated for array
+Array *deallocate(Array *my_arr);
 
-Array * split_array(Array *, int split_index);
+// Merge arrays
+Array *merge_array(Array *arr_a, Array *arr_b);
 
-/*
-// Pointers
-struct maxmin
-{
-    int max, min;
-};
-typedef struct maxmin Maxmin;
-
-int * insert_dynamic_array(int size);
-Maxmin max_min(int *arr, int size,Maxmin);
-
-int * create_two_dimension_single_ptr(int row, int col);
-int ** create_two_dimension_double_ptr(int row, int col);
-
-void display(int *arr, int row, int col);
-void display_two_dimension(int **arr, int row, int col);
-
-struct _array_
-{
-    int *arr;
-    int c_size,
-};
-*/
+// Split array
+Array *split_array(Array *my_arr, int split_index);

@@ -174,11 +174,6 @@ int intersection_set(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c
     return count; // Return size of array c
 }
 
-// Concatenate two arrays
-int concantenate_array(int src[], int size_src, int tgt[], int size_tgt){
-    return 0;
-}
-
 // Insert data in to 2D Array
 void insert_data(int row, int col, int arr[row][col]){
     int i, j;

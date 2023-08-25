@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 #include "pointers.h"
 
 // Create a dynamic array and insert elements into it, return the array address
@@ -49,7 +50,7 @@ int ** create_matrix(int row, int col){
 
     // Allocate memory for each row
     for(i=0; i<row; i++)
-        *(arr+i) =(int *) malloc(sizeof(int) * col);
+        *(arr+i) = (int *)malloc(sizeof(int) * col);
 
     // Return the double pointer to the matrix
     return arr;
@@ -80,8 +81,9 @@ void display_double_ptr(int **arr, int row, int col){
     }
 }
 
+/*
 // Function to initialize dynamic array of structure
-Earray * initialize_employee(int size){
+Earray *initialize_employee(int size){
     Earray *my_arr;
 
     my_arr = (Earray *)malloc(sizeof(Earray));
@@ -113,7 +115,7 @@ int search_by_name(Earray *my_arr, char *element){
     int i;
 
     if(my_arr == NULL)
-        return FAIL;
+        return 0;
 
     if(my_arr->arr == NULL)
         return 0;
@@ -125,10 +127,12 @@ int search_by_name(Earray *my_arr, char *element){
 
     return 0;
 }
+*/
+
 
 // Dynamic Array List Merge
 // Initialize structure array
-Array * initialize_array(int size){
+Array *initialize_array(int size){
     Array *my_arr;
 
     // Dynamically allocate memory for structure array
@@ -156,150 +160,84 @@ int insert_data(Array *my_arr, int data){
     return SUCCESS; // Insertion Success
 }
 
-/*
+// Search element within array
+int search(Array *my_arr, int element){
+    int i;
 
+    if(my_arr == NULL)
+		return FAILURE; // Check if pointer has address
+	
+    if(my_arr->arr == NULL)
+		return FAILURE; // Check if pointer has address
 
-Array * deallocate(Array *my_arr)
-{
+    for(i=0; i<my_arr->c_size; i++){
+        if(*(my_arr->arr + i) == element)
+			return SUCCESS;
+    }
+
+    return FAILURE;
+}
+
+// Deallocate memory allocated for array
+Array *deallocate(Array *my_arr){
     free(my_arr->arr);
     free(my_arr);
 
     return NULL;
 }
 
-
-int search(Array *my_arr, int element)
-{
-    int i;
-
-    if(my_arr == NULL) return FAIL;
-    if(my_arr->arr == NULL) return FAIL;
-
-    for(i=0; i<my_arr->c_size; i++)
-    {
-        if(*(my_arr->arr + i) == element) return FOUND;
-    }
-
-    return FAIL;
-}
-
-//Assumption : Both array A and B have elements
-Array * merge_array(Array *arr_a, Array *arr_b)
-{
-    int updated_c_size_a, i, j;
-
-    if(arr_a == NULL) return arr_b; // arrays does not exist
-
-    if(arr_b == NULL) return arr_b;
+// Merage arrays
+// Assumption : Both array A and B have elements
+// Merge array b with array a and deallocate array b and return NULL
+Array *merge_array(Array *arr_a, Array *arr_b){
+    int updated_c_size_a, i;
+    
+	// if array a does not exist
+    if(arr_a == NULL)
+		return arr_b; // return array b
+    
+	// if array b does not exist
+    if(arr_b == NULL) 
+		return arr_a; // return array a
 
     updated_c_size_a = arr_a->c_size + arr_b->c_size;
 
-    if(updated_c_size_a > arr_a->t_size) {
+    if(updated_c_size_a > arr_a->t_size){
         arr_a->arr = realloc(arr_a->arr, (updated_c_size_a) * sizeof(int));
         arr_a->t_size = updated_c_size_a;
     }
 
-    for(i=0; i < arr_b->c_size; i++)
+    for(i=0; i< arr_b->c_size; i++)
         assert(insert_data(arr_a, *(arr_b->arr + i)) == SUCCESS);
-
+    
+	// Deallocate array b
     arr_b = deallocate(arr_b);
-
 
     return arr_b;
 }
 
-// Pointers
-#include<stdlib.h>
-#include<stdio.h>
-#include "pointer.h"
-
-int * insert_dynamic_array(int size)
-{
-    int *arr, i;
-    arr = (int *)malloc(sizeof(int) * size);
-
-    for(i=0; i<size; i++)
-        *(arr+i) = i+1;
-
-    return arr;
+// Split array
+Array *split_array(Array *my_arr, int split_index){
+	Array *new_array;
+	int new_t_size;
+    
+	// Return NULL if input array is not present
+	if(my_arr == NULL)
+		return NULL;
+	
+	// Return NULL if requested split index is greater than c_size
+	if(split_index >= my_arr->c_size)
+		return NULL;
+		
+	// allocate memory for new array
+	new_t_size = my_arr->c_size - split_index;
+	new_array = initialize_array(new_t_size);
+	
+	// copy elements of array to new array
+	// Instead of copyig elements copy address of indexed element
+	new_array->arr = my_arr->arr + split_index;
+	new_array->c_size = new_t_size;
+	my_arr->c_size = split_index;
+	
+	return new_array;
 }
-Maxmin max_min(int *arr, int size,Maxmin res)
-{
-    int i;
-    res.max = res.min = *arr;
-
-    for(i=1; i<size; i++)
-    {
-        if(res.max < *(arr+i)) res.max = *(arr+i);
-        if(res.min > *(arr+i)) res.min = *(arr+i);
-    }
-    return res;
-}
-
-int * create_two_dimension_single_ptr(int row, int col)
-{
-    int *arr, i, j;
-
-    arr = (int *)malloc(sizeof(int) * row *col);
-
-    for(i=0;i<row;i++){
-        for(j=0;j<col;j++){
-            *(arr+(i*col)+j) = i+j;
-        }
-    }
-    return arr;
-}
-
-void display(int *arr, int row, int col)
-{
-       int i, j;
-
-    for(i=0;i<row;i++){
-        for(j=0;j<col;j++){
-            printf("%d ",*(arr+(i*col)+j));
-        }
-        printf("\n");
-    }
-
-}
-
-
-int ** create_two_dimension_double_ptr(int row, int col)
-{
-    int **arr, i;
-
-    arr = (int **)malloc(sizeof(int *) * row);
-
-    for(i=0; i<row;i++)
-        *(arr+i) = (int *) malloc(sizeof(int) * col);
-
-    return arr;
-
-}
-
-int ** insert_two_dimension_array(int row, int col)
-{
-    int **arr;
-    int i, j;
-
-    arr = create_two_dimension_double_ptr(row, col);
-
-    for(i=0; i<row;i++)
-        for(j=0;j<col;j++)
-            *(*(arr+i) +j) = i+j;
-
-    return arr;
-}
-
-void display_two_dimension(int **arr, int row, int col)
-{
-    int i, j;
-
-    for(i=0; i<row;i++){
-        for(j=0;j<col;j++){
-            printf("%d ",*(*(arr+i) +j));
-        }
-        printf("\n");
-    }
-}
-*/
