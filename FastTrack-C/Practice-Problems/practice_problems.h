@@ -172,8 +172,6 @@ int find_string_length(char str[]);
 // 41. Input date, month and year from the user, and using switch case, display in
 // worded format. e.g. input: d=16, m=7, y=1992
 // Output: 16th July, 1992
-void string_copy(char dest[], char src[]);
-void string_concat(char dest[], char src[]);
 void worded_date(int day, int month, int year, char str[]);
 
 // 42. Write a function that will scan a character string passed as an argument and convert
@@ -188,22 +186,35 @@ void reverse_string(char str[]);
 int string_palindrome(char *str);
 
 // 45. Write a program to concatenate two stings. .( Note: Do not use string.h header file)
+void string_concat(char *str_1, char *str_2);
 
 // 46. WAP to construct 5 * 5 matrix and display the contents. Use functions for
 // construction and display of matrix.
+// Create 2D matrix using double pointers
+int **create_2d_matrix(int rows, int columns);
+
+// Initialize 2D matrix
+int initialize_2d_matrix(int **my_matrix, int rows, int columns);
+
+// Print 2D matrix
+int print_2d_matrix(int **my_matrix, int rows, int columns);
 
 // 47. Given a matrix of size NxN, find it’s Transpose.
+int transpose_2d_matrix(int **my_matrix, int rows, int columns);
 
 // 48. Given a matrix of size NxM. Find the sum of each column in the matrix.
+int print_column_sum(int **my_matrix, int rows, int columns);
 
 // 49. WAP program to check if given matrix is a sparse matrix. If the number of zeros in a
 // matrix exceeds (n*m)/2, where n, m is the dimension of the matrix, matrix is sparse
 // matrix. Sparse matrix has more zero elements than nonzero elements.
+int check_if_sparse(int rows, int columns, int my_matrix[rows][columns]);
 
+/*
 // 50. Write a program to store and print the roll no., name, age and marks of 10 students
 // using structures.
 #define NAME_SIZE 20
-#define MAX_SIZE  10
+#define MAX_SIZE  5
 
 struct _student_{
     int roll_no;
@@ -224,9 +235,21 @@ typedef struct _student_array_ Student_Array;
 Student_Array initialize_array(int t_size);
 
 // Function to store data in to array
-int store_data(Student std, Student std_data);
+Student_Array store_data(Student_Array std_arr, Student std_data);
+
+// Function to print student array
+void print_data(Student_Array std_arr);
+*/
 
 // 51. Write a program to add, subtract and multiply two complex numbers using structures.
+struct _complex_num_{
+	int real, img;
+};
+typedef struct _complex_num_ Complex_Num;
+
+Complex_Num add_complex(Complex_Num a, Complex_Num b);
+Complex_Num sub_complex(Complex_Num a, Complex_Num b);
+Complex_Num mul_complex(Complex_Num a, Complex_Num b);
 
 // 52. Take the price and quantity of items as an input. Write a C function to calculate the
 // sum of the prices. Write another C function to calculate the discount according to the
@@ -289,16 +312,24 @@ int store_data(Student std, Student std_data);
 // weight associated with it. Define the structure for the above problem. Find the point
 // with maximum weight. Assuming all points are connected, count the number of
 // vertical and horizontal lines.
+struct _point_{
+	int x, y;
+	int weight;
+};
 
 // 57. Write a simple program to display the contents of a file.
+int disp_file_content(FILE *ptr);
 
 // 58. Write a program to copy the contents of one file to another.
+int copy_file_content(FILE *dest, FILE *src);
 
 // 59. Write a program to count number of characters, spaces tabs and lines in a file.
+int char_count_in_file(FILE *fptr);
 
 // 60. Read a file which contains one number per line. Check the number is odd or even and
 // write to corresponding odd.txt or even.txt accordingly. Note: Numbers may not be
 // single digit numbers.
+int odd_even_sorting(FILE *num_ptr, FILE *evn_ptr, FILE *odd_ptr);
 
 // 61. Write a program to create telephone directory. It should include Name, address and
 // telephone number. It should have facilities for adding, deleting, editing and searching

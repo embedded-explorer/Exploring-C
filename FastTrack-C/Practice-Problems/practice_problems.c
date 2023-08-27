@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include "practice_problems.h"
 
 // 1.
 char upper_to_lower(char ch){
@@ -580,6 +583,7 @@ int set_intersection(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c
     return count; // Return number of elements in array C
 }
 
+// III. A-B and B-A (Write function set_difference())
 int set_difference(int arr_a[], int size_a, int arr_b[], int size_b, int arr_c[], int size_c){
     int is_present = 0;
     int count = 0;
@@ -637,6 +641,29 @@ int linear_search(int arr[], int arr_size, int element){
 }
 
 // 38.
+// Assumption input array is sorted in ascending order
+int binary_search(int arr[], int arr_size, int element){
+	int mid, low = 0, high = arr_size;
+
+	while(low <= high){
+
+		mid = low + ((high - low) / 2);
+
+		// Return index if element is found in middle
+		if(arr[mid] == element)
+			return mid;
+
+		// If element is greater ignore lower part
+		if(arr[mid] < element)
+			low = mid + 1;
+
+		// If element is smaller ignore heigher part
+		if(arr[mid] > element)
+			high = mid - 1;
+	}
+
+	return -1; // Element not found
+}
 
 // 39.
 int sum_of_product(int arr[], int arr_size){
@@ -661,67 +688,75 @@ int find_string_length(char str[]){
 }
 
 // 41.
-void string_concat(char dest[], char src[]){
-    int dest_len;
-
-}
-
-void string_copy(char dest[], char src[]){
-    int i=0;
-    while(src[i] != '\0'){
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
-}
-
 void worded_date(int day, int month, int year, char str[]){
-
-    char date = (char)day;
-    char date_ext[3];
-
+    
+	char year_str[5];
+	
+	sprintf(str, "%d", day);
+	sprintf(year_str, "%d", year);
+	
     switch(day){
     case 1:
     case 21:
     case 31:
-        string_copy(date_ext, "st");
+        strcat(str, "st");
         break;
     case 2:
     case 22:
-        string_copy(date_ext, "nd");
+        strcat(str, "nd");
         break;
     case 3:
     case 23:
-        string_copy(date_ext, "rd");
+        strcat(str, "rd");
         break;
     default:
-        string_copy(date_ext, "th");
+        strcat(str, "th");
         break;
     }
 
-    string_copy(str, &date);
-
-    printf("%s", str);
-
-/*
     switch(month){
     case 1:
-        str[]
+        strcat(str, " January ");
+        break;
     case 2:
+	    strcat(str, " February ");
+        break;
     case 3:
+	    strcat(str, " March ");
+        break;
     case 4:
+	    strcat(str, " April ");
+        break;
     case 5:
+	    strcat(str, " May ");
+        break;
     case 6:
+	    strcat(str, " June ");
+        break;
     case 7:
+	    strcat(str, " July ");
+        break;
     case 8:
+	    strcat(str, " August ");
+        break;
     case 9:
+	    strcat(str, " September ");
+        break;
     case 10:
+	    strcat(str, " October ");
+        break;
     case 11:
+	    strcat(str, " November ");
+        break;
     case 12:
+	    strcat(str, " December ");
+        break;
     default:
         break;
     }
-*/
+	
+	strcat(str, year_str);
+	
 }
 
 // 42.
@@ -765,13 +800,318 @@ int string_palindrome(char *str){
     return 1; // palindrome
 }
 
+// 45.
+void string_concat(char *str_1, char *str_2){
+	int len_1 = 0, len_2 = 0;
+	
+	// Move to end of string 1
+	while(str_1[len_1] != '\0'){
+		len_1++;
+	}
+	
+	// Copy string 2 to string 1
+	while(str_2[len_2] != '\0'){
+		str_1[len_1++] = str_2[len_2++];
+	}
+	
+	// Add null terminator to concatenated string
+	str_1[len_1] = '\0';
+}
+
+// 46.
+// Create 2D matrix using double pointers
+int **create_2d_matrix(int rows, int columns){
+	int **matrix_ptr;
+	int i;
+	
+	// Allocate memory for an array of row pointers
+	matrix_ptr = (int **)malloc(sizeof(int *) * rows);
+	
+	// Allocate memory for each row
+	for(i = 0; i<rows; i++){
+		*(matrix_ptr + i) = (int *)malloc(sizeof(int) * columns);
+	}
+	
+	// Return the double pointer to the matrix
+	return matrix_ptr;
+}
+
+// Initialize 2D matrix
+int initialize_2d_matrix(int **my_matrix, int rows, int columns){
+	int i, j;
+	
+	// Check if double pointer has valid address
+	if(my_matrix == NULL)
+		return -1; // Return Failure
+	
+	// Check if each row pointers have valid address
+	for(i=0; i<rows; i++){
+		if(*(my_matrix + i) == NULL)
+			return -1;
+	}
+	
+	// Insert elements
+	for(i=0; i<rows; i++){
+		for(j=0; j<columns; j++)
+			*(*(my_matrix + i)+j) = rand() % 40;
+	}
+	
+	return 1; // Return Success
+}
+
+// Print 2D matrix
+int print_2d_matrix(int **my_matrix, int rows, int columns){
+	int i, j;
+	
+	// Check if double pointer has valid address
+	if(my_matrix == NULL)
+		return -1; // Return Failure
+	
+	// Check if each row pointers have valid address
+	for(i=0; i<rows; i++){
+		if(*(my_matrix + i) == NULL)
+			return -1;
+	}
+	
+	// Print elements
+	for(i=0; i<rows; i++){
+		for(j=0; j<columns; j++){
+			printf("%02d ", *(*(my_matrix + i)+j));
+		}
+		printf("\n");
+	}
+	
+	return 1; // Return Success
+}
+
+// 47.
+// Assumption works for square matrix
+int transpose_2d_matrix(int **my_matrix, int rows, int columns){
+	int temp, i, j;
+	
+	// Check if double pointer has valid address
+	if(my_matrix == NULL)
+		return -1; // Return Failure
+	
+	// Check if each row pointers have valid address
+	for(i=0; i<rows; i++){
+		if(*(my_matrix + i) == NULL)
+			return -1;
+	}
+	
+	// Run swapping for upper traingular matrix
+	for(i=0; i<rows; i++){
+		for(j=i+1; j<columns; j++){
+			if(i != j){
+			    temp = *(*(my_matrix + i)+j);
+			    *(*(my_matrix + i)+j) = *(*(my_matrix + j)+i);
+			    *(*(my_matrix + j)+i) = temp;
+			}
+		}
+	}
+	
+	return 1; // Return Success
+}
+
+// 48.
+int print_column_sum(int **my_matrix, int rows, int columns){
+	int col_sum, i, j;
+	
+	// Check if double pointer has valid address
+	if(my_matrix == NULL)
+		return -1; // Return Failure
+	
+	// Check if each row pointers have valid address
+	for(i=0; i<rows; i++){
+		if(*(my_matrix + i) == NULL)
+			return -1;
+	}
+	
+	for(j=0; j<columns; j++){
+		col_sum = 0;
+		for(i=0; i<rows; i++){
+			col_sum += *(*(my_matrix + i)+j);
+		}
+		printf("%03d ", col_sum);
+	}
+	
+	return 1; // Return Success
+}
+
+// 49.
+int check_if_sparse(int rows, int columns, int my_matrix[rows][columns]){
+	int i, j, count = 0;
+	int valid = (rows * columns)/2;
+	
+	// Check if double pointer has valid address
+	if(my_matrix == NULL)
+		return -1; // Return Failure
+	
+	for(i=0; i<rows; i++){
+		for(j=0; j<columns; j++){
+			if(my_matrix[i][j] == 0)
+				count++;
+		}
+	}
+
+	return count > valid;
+}
+
+/*
 // 50.
-Student_Array initialize_array(int t_size){
+// Function to Initialize Array
+Student_Array initialize_array(int size){
     Student_Array my_arr;
     my_arr.c_size = 0;
-    my_arr.t_size = size > 0 && size <= MAX_SIZE ? size : MAX_SIZE;
+    my_arr.t_size = (size > 0 && size <= MAX_SIZE) ? size : MAX_SIZE;
     return my_arr;
 }
 
-int store_data(Student std, Student std_data){
+// Function to store data in to array
+Student_Array store_data(Student_Array std_arr, Student std_data){
+	if(std_arr.c_size == std_arr.t_size)
+		return std_arr; // Return Failure
+	
+	std_arr.std[std_arr.c_size++] = std_data;
+	
+	return std_arr; // Return Success
+}
+
+// Function to print student array
+void print_data(Student_Array std_arr){
+	Student std;
+	for(int i=0; i<std_arr.c_size; i++){
+		std = std_arr.std[i];
+	    printf("Roll No.: %d\n", std.roll_no);
+		printf("Name    : %s\n", std.name);
+		printf("Age     : %d\n", std.age);
+		printf("Marks   : %f\n\n", std.marks);
+	}
+}
+*/
+
+// 51.
+Complex_Num add_complex(Complex_Num a, Complex_Num b){
+	Complex_Num res;
+	
+	res.real = a.real + b.real;
+	res.img = a.img + b.img;
+	
+	return res;
+}
+
+Complex_Num sub_complex(Complex_Num a, Complex_Num b){
+	Complex_Num res;
+	
+	res.real = a.real - b.real;
+	res.img = a.img - b.img;
+	
+	return res;
+}
+
+// (a+bi)(c+di)=(ac-bd)+(ad+bc)i
+Complex_Num mul_complex(Complex_Num a, Complex_Num b){
+	Complex_Num res;
+	
+	res.real = (a.real*b.real) - (a.img*b.img);
+	res.img = (a.real*b.img) + (a.img*b.real);
+	
+	return res;
+}
+
+// 57.
+int disp_file_content(FILE *ptr){
+	
+	char ch;
+	if(ptr == NULL)
+		return -1; // Return Failure
+	
+	do{
+		ch = fgetc(ptr);
+		printf("%c", ch);
+	}while(ch != EOF);
+		
+	return 1; // Return Success
+}
+
+// 58.
+int copy_file_content(FILE *dest, FILE *src){
+	
+	char ch;
+	if(dest == NULL)
+		return -1; // Return Failure
+	
+	if(src == NULL)
+		return -1; // Return Failure
+	
+	// https://stackoverflow.com/questions/31630072/extra-character-at-end-while-copying
+	while(1){
+		ch = fgetc(src);
+		if(ch == EOF)
+			break;
+		fputc(ch, dest);
+	}
+		
+	return 1; // Return Success
+}
+
+// 59.
+int char_count_in_file(FILE *fptr){
+	char ch;
+	int char_count = 0;
+	int line_count = 0;
+	int tab_count = 0;
+	int space_count = 0;
+
+	if(fptr == NULL)
+		return -1; // Return Failure
+	
+	do{
+		ch = fgetc(fptr);
+		if(ch == '\n')
+			line_count++;
+		else if(ch == '\t')
+			tab_count++;
+		else if(ch == ' ')
+			space_count++;
+		else
+			char_count++;
+	}while(ch != EOF);
+	
+	printf("Character Count: %d\n", char_count);
+	printf("Space Count    : %d\n", space_count);
+	printf("Tab Count      : %d\n", tab_count);
+	printf("Line Count     : %d\n", line_count);
+	
+	return 1; // Return Success
+}
+
+// 60.
+int odd_even_sorting(FILE *num_ptr, FILE *evn_ptr, FILE *odd_ptr){
+	
+	char ch;
+	int num = 0;
+	
+	if(num_ptr == NULL || evn_ptr == NULL || odd_ptr == NULL)
+		return -1; // Return Failure
+
+	do{
+		num = 0;
+		while(1){
+			ch = fgetc(num_ptr);
+			// Break if end of line or end of file
+			if(ch == '\n' || ch == EOF)
+				break;
+			// Convert to integer from character
+			num = (num * 10) + ((int)ch - '0');
+		}
+		
+		if(num%2)
+			fprintf(odd_ptr, "%d\n", num);
+		else
+			fprintf(evn_ptr, "%d\n", num);
+		
+	}while(ch != EOF);
+	
+	return 1; // Return Success
 }

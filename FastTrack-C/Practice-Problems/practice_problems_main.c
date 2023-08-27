@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <string.h>
 #include "practice_problems.h"
 
 int main(){
@@ -351,7 +352,19 @@ int main(){
 */
 
 /*
-    // 38.
+// 38.
+    #define SIZE 10
+    int arr[SIZE] = {0};
+
+    for(int i=0; i<SIZE; i++){
+        arr[i] = rand() % 40;
+    }
+
+	assert(ascending_sort(arr, SIZE));
+    print_int_array(arr, SIZE);
+
+    assert(binary_search(arr, SIZE, 9) == 3);
+    assert(binary_search(arr, SIZE, 6) == -1);
 */
 
 /*
@@ -375,7 +388,9 @@ int main(){
     #define SIZE 100
     char str[SIZE];
 
-    worded_date(16, 7, 1992, str);
+    worded_date(17, 7, 1998, str);
+	assert(strcmp(str, "17th July 1999") == -1);
+	assert(strcmp(str, "17th July 1998") == 0);
 */
 
 /*
@@ -404,18 +419,171 @@ int main(){
     assert(string_palindrome("HiiH") == 1);
 */
 
+/*
+// 45.
+    #define SIZE 100
+	char str_1[SIZE] = "Fast-Track ";
+	char str_2[] = "C";
+	string_concat(str_1, str_2);
+    assert(strcmp(str_1, "Fast-Track C") == 0);
+*/
 
+/*
+// 46.
+    #define ROW_SIZE 5
+	#define COL_SIZE 7
+	int **matrix;
+	
+	matrix = create_2d_matrix(ROW_SIZE, COL_SIZE);
+	assert(matrix != NULL);
+	assert(initialize_2d_matrix(matrix, ROW_SIZE, COL_SIZE) == 1);
+	assert(print_2d_matrix(matrix, ROW_SIZE, COL_SIZE) == 1);
+*/
 
+/*
+// 47.
+    #define ROW_SIZE 5
+	#define COL_SIZE 5
+	int **matrix;
+	
+	matrix = create_2d_matrix(ROW_SIZE, COL_SIZE);
+	assert(matrix != NULL);
+	assert(initialize_2d_matrix(matrix, ROW_SIZE, COL_SIZE) == 1);
+	assert(print_2d_matrix(matrix, ROW_SIZE, COL_SIZE) == 1);
+	printf("\n");
+	assert(transpose_2d_matrix(matrix, ROW_SIZE, COL_SIZE) == 1);
+	assert(print_2d_matrix(matrix, ROW_SIZE, COL_SIZE) == 1);
+*/
 
+/*
+// 48.
+    #define ROW_SIZE 5
+	#define COL_SIZE 5
+	int **matrix;
+	
+	matrix = create_2d_matrix(ROW_SIZE, COL_SIZE);
+	assert(matrix != NULL);
+	assert(initialize_2d_matrix(matrix, ROW_SIZE, COL_SIZE) == 1);
+	assert(print_2d_matrix(matrix, ROW_SIZE, COL_SIZE) == 1);
+	printf("\n");
+	assert(print_column_sum(matrix, ROW_SIZE, COL_SIZE) == 1);
+*/
 
+/*
+// 49.
+    #define ROW_SIZE 5
+	#define COL_SIZE 5
+	int matrix_1[ROW_SIZE][COL_SIZE] = {{2, 4, 6, 0, 9}, \
+		                                {1, 4, 6, 0, 9}, \
+								        {2, 4, 6, 0, 9}, \
+									    {8, 4, 6, 0, 9}, \
+								        {2, 4, 6, 0, 9}};
+	
+    int matrix_2[ROW_SIZE][COL_SIZE] = {{2, 0, 6, 0, 0}, \
+		                                {0, 4, 0, 0, 9}, \
+								        {2, 0, 6, 0, 9}, \
+									    {0, 4, 0, 0, 9}, \
+								        {2, 0, 6, 0, 0}};
+	
+	assert(check_if_sparse(ROW_SIZE, COL_SIZE, matrix_1) == 0);
+	assert(check_if_sparse(ROW_SIZE, COL_SIZE, matrix_2) == 1);
+*/
 
-
-
+/*
 // 50.
     Student_Array std_arr;
+	// Assigning in this way is only possible during declaration
+	Student std_1 = {8001, "Hrishikesh", 25, 7.97};
+	Student std_2 = {8002, "Deon", 21, 8.3};
+	Student std_3;
+    // Explicit assignment must be made after decleration
+	std_3.roll_no = 8003;
+    strcpy(std_3.name, "Narendra");
+    std_3.age = 24;
+    std_3.marks = 8.5;
+	
+	// Check initialize function
+    std_arr = initialize_array(3);
+    assert(std_arr.c_size == 0);
+    assert(std_arr.t_size == 3);
+    
+	// Check store data function
+	std_arr = store_data(std_arr, std_1);
+	assert(std_arr.c_size == 1);
+	std_arr = store_data(std_arr, std_2);
+	std_arr = store_data(std_arr, std_3);
+	
+	// Check print function
+	print_data(std_arr);
+*/
 
-    std_arr = initialize_array(10);
+/*
+// 51.
+    Complex_Num a = {4, 7};
+    Complex_Num b = {0, 3};
+	Complex_Num result;
+	
+	// Test complex addition
+	result = add_complex(a, b);
+    assert(result.real == 4);
+    assert(result.img == 10);
+	
+	// Test complex subtraction
+	result = sub_complex(a, b);
+    assert(result.real == 4);
+    assert(result.img == 4);
+	
+	// Test complex multiplication
+	result = mul_complex(a, b);
+    assert(result.real ==-21);
+    assert(result.img == 12);
+*/
 
-    return 0;
+/*
+// 57.
+    FILE *fptr;
+	fptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/text_file_1.txt", "r");
+	
+	assert(disp_file_content(fptr) == 1);
+	
+	fclose(fptr);
+*/
+
+/*
+// 58.
+    FILE *dest, *src;
+	src = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/text_file_1.txt", "r");
+	dest = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/text_file_2.txt", "w");
+	
+	assert(copy_file_content(dest, src) == 1);
+	
+	fclose(dest);
+	fclose(src);
+*/
+
+/*
+// 59.
+    FILE *fptr;
+	fptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/char_count.txt", "r");
+	
+	char_count_in_file(fptr);
+	
+	fclose(fptr);
+*/
+
+/*
+// 60.
+    FILE *num_ptr;
+    FILE *odd_ptr;
+    FILE *evn_ptr;
+	
+	num_ptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/num_file.txt", "r");
+	odd_ptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/odd_file.txt", "w");
+	evn_ptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/evn_file.txt", "w");
+	
+    odd_even_sorting(num_ptr, evn_ptr, odd_ptr);
+*/
+	
+	return 0;
 }
 
