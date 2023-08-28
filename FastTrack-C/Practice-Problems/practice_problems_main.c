@@ -582,8 +582,28 @@ int main(){
 	evn_ptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/evn_file.txt", "w");
 	
     odd_even_sorting(num_ptr, evn_ptr, odd_ptr);
-*/
 	
+	fclose(num_ptr);
+	fclose(odd_ptr);
+	fclose(evn_ptr);
+*/
+
+
+// 61.
+    FILE *fptr;
+	Contact contact_1 = {"Hrishikesh", "Bharathi Complex, Manipal", "7349493697"};
+	Contact contact_2 = {"Mother", "Iruvail, Moodbidri", "9902397988"};
+	Contact contact_3 = {"Father", "Sheshadripuram, Bangalore", "8105895176"};
+	
+	fptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt", "r+");
+	
+	// Test add record
+	assert(add_record(fptr, &contact_1));
+	assert(add_record(fptr, &contact_2));
+	assert(add_record(fptr, &contact_3));
+	
+	fclose(fptr);
+
 	return 0;
 }
 

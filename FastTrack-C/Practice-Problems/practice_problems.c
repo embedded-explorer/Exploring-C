@@ -1115,3 +1115,15 @@ int odd_even_sorting(FILE *num_ptr, FILE *evn_ptr, FILE *odd_ptr){
 	
 	return 1; // Return Success
 }
+
+// 61.
+// Add record
+int add_record(FILE *fptr, Contact *contact){
+	
+	if(fptr == NULL)
+		return -1; // Return Failure
+	
+	fwrite(contact, sizeof(Contact), 1, fptr);
+	
+	return 1; // Return Success
+}
