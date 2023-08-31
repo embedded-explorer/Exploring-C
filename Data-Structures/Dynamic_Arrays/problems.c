@@ -106,6 +106,7 @@ void allocate_seats(App_List *my_arr){
 				}
 			}
 		}
+		printf("min_rank_idx : %d\n", min_rank_idx);
 		(my_arr->app_ptr + min_rank_idx)->is_admitted = 1;
 		merit_count++;
 	}

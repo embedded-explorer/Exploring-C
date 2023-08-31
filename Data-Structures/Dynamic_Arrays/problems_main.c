@@ -13,7 +13,7 @@ int main(){
     int i;
 	
 	// Applications
-    Application new_app[30] = {{41, merit     , "Aruna"    },
+    Application new_app[30] = {{16, merit     , "Aruna"    },
                                {53, merit     , "Aryan"    },
                                {97, nri       , "Vikram"   },
                                {67, merit     , "Rahul"    },
@@ -23,26 +23,26 @@ int main(){
                                {54, nri       , "Riya"     },
                                {34, merit     , "Meera"    },
                                {11, merit     , "Pooja"    },
-                               {62, merit     , "Ishita"   },
+                               {59, merit     , "Ishita"   },
                                {29, merit     , "Rohit"    },
-                               {16, merit     , "Sanya"    },
+                               {41, merit     , "Sanya"    },
                                {96, nri       , "Aditya"   },
                                {61, management, "Abhinav"  },
                                {95, management, "Varun"    },
                                {25, merit     , "Yash"     },
-                               {62, merit     , "Karan"    },
+                               {37, merit     , "Karan"    },
                                {75, nri       , "Ananya"   },
                                {90, nri       , "Swati"    },
                                {18, merit     , "Nikhil"   },
                                {51, merit     , "Tanvi"    },
-                               {41, management, "Priya"    },
-                               {54, nri       , "Alisha"   },
-                               {94, management, "Sneha"    },
+                               {43, management, "Priya"    },
+                               {52, nri       , "Alisha"   },
+                               {76, management, "Sneha"    },
                                {7 , merit     , "Aniket"   },
-                               {96, merit     , "Rajat"    },
+                               {89, merit     , "Rajat"    },
                                {5 , merit     , "Arjun"    },
                                {17, merit     , "Akshay"   },
-	                           {95, management, "Neha"     }};
+	                           {94, management, "Neha"     }};
 
 	// Test initialization function
     app_list = initialise_array(30);
