@@ -92,7 +92,15 @@ void allocate_seats(App_List *my_arr){
 	
 	// Allocate seats in merit category until they are filled
 	while(merit_count < 10){
-		min_rank_idx = 0;
+		
+		// Set first unalloated index as minimum index
+		for(i=0; i<my_arr->c_size; i++){
+			if(!(my_arr->app_ptr + i)->is_admitted){
+				min_rank_idx = i;
+				break;
+			}
+		}
+		
 		for(j=0; j<my_arr->c_size; j++){
 			// Check if category is merit
 		    if((my_arr->app_ptr + j)->category == merit){
@@ -106,7 +114,8 @@ void allocate_seats(App_List *my_arr){
 				}
 			}
 		}
-		printf("min_rank_idx : %d\n", min_rank_idx);
+		
+		// Allocate seat
 		(my_arr->app_ptr + min_rank_idx)->is_admitted = 1;
 		merit_count++;
 	}
@@ -121,10 +130,11 @@ void display_app_list(App_List *my_arr){
 	int i;
 	
 	for(i=0; i<my_arr->c_size; i++){
-		printf("Rank : %2d\t Category : %d\t Name : %s\t Status: %d\n", \
-		      (my_arr->app_ptr + i)->rank, \
-			  (my_arr->app_ptr + i)->category, \
-			  (my_arr->app_ptr + i)->name, \
-			  (my_arr->app_ptr + i)->is_admitted);
+		if((my_arr->app_ptr + i)->is_admitted)
+		    printf("Rank : %2d\t Category : %d\t Name : %s\t Status: %d\n", \
+		            (my_arr->app_ptr + i)->rank, \
+			        (my_arr->app_ptr + i)->category, \
+			        (my_arr->app_ptr + i)->name, \
+			        (my_arr->app_ptr + i)->is_admitted);
 	}
 }
