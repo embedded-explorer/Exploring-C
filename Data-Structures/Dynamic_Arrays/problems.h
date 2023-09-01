@@ -20,6 +20,7 @@
 #define MGMT_SEATS 3
 #define NRI_SEATS 2
 
+// Status of function calls
 #define SUCCESS 1
 #define FAILURE 0
 
@@ -39,7 +40,6 @@ typedef struct _application_ Application;
 struct _app_list_{
     Application *app_ptr; // Application list pointer
     int c_size, t_size;
-    //int mer_idx, mgt_idx, nri_idx;
 };
 typedef struct _app_list_ App_List;
 
@@ -54,3 +54,6 @@ void allocate_seats(App_List *my_arr);
 
 // Function to display application list
 void display_app_list(App_List *my_arr);
+
+// Function to deallocate memory of application list
+App_List *deallocate(App_List *my_arr);

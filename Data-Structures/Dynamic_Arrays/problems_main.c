@@ -46,6 +46,7 @@ int main(){
 
 	// Test initialization function
     app_list = initialise_array(30);
+	assert(app_list != NULL);
     assert(app_list->c_size == 0 && app_list->t_size == 30);
 
     // Test apply for course
@@ -59,6 +60,10 @@ int main(){
 	
 	// Test Display application list
 	display_app_list(app_list);
+	
+	// Deallocate application list memory
+	app_list = deallocate(app_list);
+	assert(app_list == NULL);
 
     return 0;
 }
