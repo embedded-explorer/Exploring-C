@@ -88,7 +88,7 @@ void allocate_seats(App_List *my_arr){
 	}
 	
 	// Allocate seats in merit category until they are filled
-	while(merit_count < 10){
+	while(merit_count < MERIT_SEATS){
 		
 		// Set first non admitted index as minimum index
 		for(i=0; i<my_arr->c_size; i++){

@@ -11,7 +11,7 @@ int main(){
 //----------------------------------------------------------------------
     App_List *app_list;
     int i;
-	
+
 	// Applications
     Application new_app[30] = {{16, merit     , "Aruna"    },
                                {53, merit     , "Aryan"    },
@@ -54,13 +54,13 @@ int main(){
       assert(apply_for_course(app_list, new_app[i]));
 	}
 	assert(app_list->c_size == 30);
-	
+
 	// Test allocate seats function
 	allocate_seats(app_list);
-	
+
 	// Test Display application list
 	display_app_list(app_list);
-	
+
 	// Deallocate application list memory
 	app_list = deallocate(app_list);
 	assert(app_list == NULL);
