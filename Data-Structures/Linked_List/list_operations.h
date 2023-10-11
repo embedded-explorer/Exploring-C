@@ -58,3 +58,9 @@ int merge_list(List *list_1, List *list_2);
 
 // Function to find intersection of two lists
 List *intersection_list(List *list_1, List *list_2);
+
+// Function to find union of two lists
+List *union_list(List *list_1, List *list_2);
+
+// Function to find List A minus List B
+List *list_a_minus_list_b(List *list_a, List *list_b);

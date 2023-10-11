@@ -327,3 +327,139 @@ List *merge_sorted_lists(List *list_a, List *list_b){
 
     return list_c;
 }
+
+//--------------------------------------------------
+// Function to merge two lists
+// @param  : List A
+// @param  : List B
+// @return : Status
+//--------------------------------------------------
+int merge_list(List *list_1, List *list_2){
+	
+	// Check if list 1 is valid
+	if(list_1 == NULL)
+		return FAILURE;
+	
+	// Link list 2 to list 1
+	list_1->tail->ptr = list_2->head;
+	
+	// Reset List 2
+	list_2 = reset_list(list_2);
+	
+	return SUCCESS;
+}
+
+//--------------------------------------------------
+// Function to find intersection of two lists
+// @param  : List A
+// @param  : List B
+// @return : List C
+//--------------------------------------------------
+List *intersection_list(List *list_a, List *list_b){
+	List *list_c;
+	Node *temp_a, *temp_b;
+	
+	// Allocate memory for new list
+	list_c = initialize_list();
+	
+	temp_a = list_a->head;
+	temp_b = list_b->head;
+	
+	// Iterate Through List A
+	while(temp_a != NULL){
+		// Iterate Through List B
+		while(temp_b != NULL){
+			// If element is found in both the lists
+			if(temp_a->data == temp_b->data){
+				// If element is not added already to list c
+				if(!search_list(list_c, temp_a->data)){
+					insert_at_end(list_c, temp_a->data);
+				}
+			}
+			temp_b = temp_b->ptr;
+		}
+		temp_b = list_b->head;
+		temp_a = temp_a->ptr;
+	}
+	
+	return list_c;
+}
+
+//--------------------------------------------------
+// Function to find union of two lists
+// @param  : List A
+// @param  : List B
+// @return : List C
+//--------------------------------------------------
+List *union_list(List *list_a, List *list_b){
+	List *list_c;
+	Node *temp_a, *temp_b;
+	
+	// Allocate memory for new list
+	list_c = initialize_list();
+	
+	temp_a = list_a->head;
+	temp_b = list_b->head;
+	
+	// Iterate Through List A
+	while(temp_a != NULL){
+		// If element is not added already to list c
+		if(!search_list(list_c, temp_a->data)){
+			insert_at_end(list_c, temp_a->data);
+		}
+	    temp_a = temp_a->ptr;
+    }
+	
+	// Iterate Through List B
+    while(temp_b != NULL){
+		// If element is not added already to list c
+		if(!search_list(list_c, temp_b->data)){
+			insert_at_end(list_c, temp_b->data);
+		}
+		temp_b = temp_b->ptr;
+	}
+	
+	return list_c;
+}
+
+//--------------------------------------------------
+// Function to find List A minus List B
+// @param  : List A
+// @param  : List B
+// @return : List C
+//--------------------------------------------------
+List *list_a_minus_list_b(List *list_a, List *list_b){
+	List *list_c;
+	Node *temp_a, *temp_b;
+	int common;
+	
+	// Allocate memory for new list
+	list_c = initialize_list();
+	
+	temp_a = list_a->head;
+	temp_b = list_b->head;
+	
+	// Iterate Through List A
+	while(temp_a != NULL){
+		// Iterate Through List B
+		common = 0;
+		while(temp_b != NULL){
+			// If element is found in both the lists
+			if(temp_a->data == temp_b->data){
+				common = 1;
+			}
+			temp_b = temp_b->ptr;
+		}
+		// If element is not common
+		if(!common){
+		    // If element is not added already to list c
+			if(!search_list(list_c, temp_a->data)){
+				insert_at_end(list_c, temp_a->data);
+			}
+		}
+		temp_b = list_b->head;
+		temp_a = temp_a->ptr;
+	}
+	
+	return list_c;
+}

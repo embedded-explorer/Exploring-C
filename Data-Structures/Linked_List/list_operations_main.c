@@ -55,7 +55,7 @@ int main(){
     list_c = deallocate_list(list_c);
 */
 
-
+/*
 //----------------------------------------------------------------------
 // Function to merge two sorted lists in sorted order
 //----------------------------------------------------------------------
@@ -102,6 +102,126 @@ int main(){
 	print_list(list_b);
     list_c = merge_sorted_lists(list_a, list_b);
 	printf("List 3: ");
+	print_list(list_c);
+*/
+
+/*
+//----------------------------------------------------------------------
+// Function to merge two lists
+//----------------------------------------------------------------------
+    List *list_a, *list_b;
+    
+    // Initialize List A
+	list_a = initialize_list();
+	assert(list_a != NULL);
+	assert(list_a->count == 0);
+	assert(list_a->head == NULL && list_a->tail == NULL);
+
+    // Initialize List B
+    list_b = initialize_list();
+	assert(list_b != NULL);
+	assert(list_b->count == 0);
+	assert(list_b->head == NULL && list_b->tail == NULL);
+
+	// Insert elements to list A
+	assert(insert_at_end(list_a, 2) == SUCCESS);
+	assert(insert_at_end(list_a, 3) == SUCCESS);
+	assert(insert_at_end(list_a, 5) == SUCCESS);
+	assert(insert_at_end(list_a, 7) == SUCCESS);
+	assert(insert_at_end(list_a, 8) == SUCCESS);
+    assert(insert_at_end(list_a, 10) == SUCCESS);
+    assert(insert_at_end(list_a, 20) == SUCCESS);
+    assert(list_a->count == 7);
+    assert(list_a->head->data == 2);
+    assert(list_a->tail->data == 20);
+
+    // Insert elements to list B
+    assert(insert_at_end(list_b, 2) == SUCCESS);
+	assert(insert_at_end(list_b, 6) == SUCCESS);
+	assert(insert_at_end(list_b, 9) == SUCCESS);
+	assert(insert_at_end(list_b, 15) == SUCCESS);
+	assert(insert_at_end(list_b, 20) == SUCCESS);
+    assert(list_b->count == 5);
+    assert(list_b->head->data == 2);
+    assert(list_b->tail->data == 20);
+	
+	// Test Function to merge lists
+	printf("List 1: ");
+	print_list(list_a);
+	printf("List 2: ");
+	print_list(list_b);
+    assert(merge_list(list_a, list_b) == SUCCESS);
+	printf("After Merging\n");
+	printf("List 1: ");
+	print_list(list_a);
+	printf("List 2: ");
+	print_list(list_b);
+*/
+
+//----------------------------------------------------------------------
+// Intersection and union of two lists
+//----------------------------------------------------------------------
+    List *list_a, *list_b, *list_c;
+    
+    // Initialize List A
+	list_a = initialize_list();
+	assert(list_a != NULL);
+	assert(list_a->count == 0);
+	assert(list_a->head == NULL && list_a->tail == NULL);
+
+    // Initialize List B
+    list_b = initialize_list();
+	assert(list_b != NULL);
+	assert(list_b->count == 0);
+	assert(list_b->head == NULL && list_b->tail == NULL);
+
+	// Insert elements to list A
+	assert(insert_at_end(list_a, 2) == SUCCESS);
+	assert(insert_at_end(list_a, 3) == SUCCESS);
+	assert(insert_at_end(list_a, 5) == SUCCESS);
+	assert(insert_at_end(list_a, 7) == SUCCESS);
+	assert(insert_at_end(list_a, 8) == SUCCESS);
+    assert(insert_at_end(list_a, 10) == SUCCESS);
+    assert(insert_at_end(list_a, 20) == SUCCESS);
+    assert(list_a->count == 7);
+    assert(list_a->head->data == 2);
+    assert(list_a->tail->data == 20);
+
+    // Insert elements to list B
+    assert(insert_at_end(list_b, 2) == SUCCESS);
+	assert(insert_at_end(list_b, 6) == SUCCESS);
+	assert(insert_at_end(list_b, 7) == SUCCESS);
+	assert(insert_at_end(list_b, 15) == SUCCESS);
+	assert(insert_at_end(list_b, 20) == SUCCESS);
+    assert(list_b->count == 5);
+    assert(list_b->head->data == 2);
+    assert(list_b->tail->data == 20);
+	
+	// Test function to find intersection of two lists
+	printf("List 1: ");
+	print_list(list_a);
+	printf("List 2: ");
+	print_list(list_b);
+    list_c = intersection_list(list_a, list_b);
+    printf("Intersection: ");
+	print_list(list_c);
+	
+	// Test function to find union of two lists
+	printf("List 1: ");
+	print_list(list_a);
+	printf("List 2: ");
+	print_list(list_b);
+    list_c = union_list(list_a, list_b);
+    printf("Union: ");
+	print_list(list_c);
+	
+	// Test function to find Lis 1 minus List 2
+	printf("List 1: ");
+	print_list(list_a);
+	printf("List 2: ");
+	print_list(list_b);
+    list_c = list_a_minus_list_b(list_a, list_b);
+    printf("List 1 - List 2: ");
 	print_list(list_c);
 
     return 0;
