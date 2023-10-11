@@ -1,4 +1,4 @@
-
+/*
 //----------------------------------------------------------------------
 // Stack - Array Implementation (Dynamic Array)
 //----------------------------------------------------------------------
@@ -68,5 +68,99 @@ int stack_peek(Stack *my_stack){
 Stack *stack_deallocate(Stack *my_stack){
 	free(my_stack->data);
 	free(my_stack);
+	return NULL;
+}
+*/
+
+//----------------------------------------------------------------------
+// Stack - Linked List Implementation
+//----------------------------------------------------------------------
+#include <stdlib.h>
+#include "stack.h"
+
+// Stack initialization function
+Stack *stack_initialize(){
+	Stack *my_stack;
+	
+	// Allocate memory for stack
+	my_stack = (Stack *)malloc(sizeof(Stack));
+	
+	if(my_stack == NULL)
+		return NULL; // Memory allocation failed
+
+	my_stack->head = NULL;
+	
+	return my_stack;
+}
+
+// Function to create new node
+Node *create_node(int data){
+	Node *new_node;
+	
+	new_node = (Node *)malloc(sizeof(Node));
+	
+	if(new_node == NULL)
+		return NULL; // Memory allocation failed
+	
+	new_node->data = data;
+	new_node->ptr  = NULL;
+	
+	return new_node;
+}
+
+// Push Function, returns status
+int stack_push(Stack *my_stack, int data){
+	Node *new_node;
+	
+	new_node = create_node(data);
+	
+	if(new_node == NULL)
+		return FAILURE; // Insertion Failed
+	
+	// Insert at beginning
+	new_node->ptr = my_stack->head;
+	my_stack->head = new_node;
+	
+	return SUCCESS;
+}
+
+// Pop Function, returns data
+int stack_pop(Stack *my_stack){
+	Node *temp;
+	int data;
+	
+	if(my_stack->head == NULL)
+		return FAILURE;
+	
+	// Delete at beginning
+	temp = my_stack->head;
+	my_stack->head = temp->ptr;
+	data = temp->data;
+	free(temp);
+	
+	return data;
+}
+
+// Peek Function, returns data
+int stack_peek(Stack *my_stack){
+	
+	if(my_stack->head == NULL)
+		return FAILURE;
+	
+	return my_stack->head->data;
+}
+
+// Deallocate Function, returns NULL pointer
+Stack *stack_deallocate(Stack *my_stack){
+	Node *temp;
+	
+	while(my_stack->head != NULL){
+		temp = my_stack->head;
+		my_stack->head = temp->ptr;
+		free(temp);
+	}
+	
+	free(my_stack);
+	
 	return NULL;
 }

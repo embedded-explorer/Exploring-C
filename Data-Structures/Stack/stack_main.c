@@ -5,7 +5,7 @@
 
 int main()
 {
-	
+/*
 //----------------------------------------------------------------------
 // Stack - Array Implementation (Dynamic Array)
 //----------------------------------------------------------------------
@@ -34,6 +34,36 @@ int main()
 	
 	// Test pop function
 	for(i=100; i>=STACK_SIZE; i=i-10){
+		assert(stack_pop(my_stack) == i);
+	}
+	
+	// Deallocate memory
+	my_stack = stack_deallocate(my_stack);
+*/
+
+//----------------------------------------------------------------------
+// Stack - Linked List Implementation
+//----------------------------------------------------------------------
+	Stack *my_stack;
+	int i;
+	
+	// Test initialization function
+	my_stack = stack_initialize();
+	assert(my_stack != NULL);
+	assert(my_stack->head == NULL);
+	
+	// Test push function
+	for(i=0; i<10; i++){
+		assert(stack_push(my_stack, i*10 + 10)); // insert 10 to 100
+	}
+	
+	// Test peek function to check data on stack top
+	assert(stack_peek(my_stack) == 100);
+	assert(stack_peek(my_stack) == 100);
+	assert(stack_peek(my_stack) == 100);
+	
+	// Test pop function
+	for(i=100; i>=10; i=i-10){
 		assert(stack_pop(my_stack) == i);
 	}
 	
