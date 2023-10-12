@@ -11,6 +11,7 @@ int main(){
 // Dynamic Array List Example
 //----------------------------------------------------------------------
     Array *test_arr;
+	int max, min;
     
 	// Test initialization function
     test_arr = initialise_array(10);
@@ -41,6 +42,14 @@ int main(){
     assert(search(test_arr, 20) == SUCCESS);
     assert(search(test_arr, 55) == FAILURE);
 
+    // Test Maximum Minimum Function
+	assert(max_min(test_arr, &max, &min) == SUCCESS);
+	assert(max == 90);
+	assert(min == 10);
+	
+	// Test Print array
+	print_array(test_arr);
+   
     // Test deallocate array function
 	test_arr = deallocate(test_arr);
 	assert(test_arr == NULL);

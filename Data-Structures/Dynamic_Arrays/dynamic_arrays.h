@@ -22,5 +22,11 @@ int insert_data(Array *my_arr, int data);
 // Function to search given element within array using linear search
 int search(Array *my_arr, int element);
 
+// Function to find maximum and minimum elements
+int max_min(Array *my_arr, int *max, int *min);
+
+// Function to print array
+void print_array(Array *my_array);
+
 // Function to deallocate array list
 Array *deallocate(Array *my_arr);

@@ -4,6 +4,7 @@
 //----------------------------------------------------------------------
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "dynamic_arrays.h"
 
 //--------------------------------------------------
@@ -78,4 +79,40 @@ Array *deallocate(Array *my_arr){
 	free(my_arr);
 
 	return NULL;
+}
+
+//--------------------------------------------------
+// Function to find maximum and minimum elements
+// @param  : App_List pointer
+// @param  : *Maximum
+// @param  : *Minimum
+// @return : NULL Pointer
+//--------------------------------------------------
+int max_min(Array *my_arr, int *max, int *min){
+	int i;
+	
+	*max = *(my_arr->array);
+	*min = *(my_arr->array);
+	
+	for(i=0; i<my_arr->c_size; i++){
+		if(*max < *(my_arr->array + i))
+			*max = *(my_arr->array + i);
+		if(*min > *(my_arr->array + i))
+			*min = *(my_arr->array + i);
+	}
+
+	return SUCCESS;
+}
+
+//--------------------------------------------------
+// Function to print array
+// @param  : App_List pointer
+//--------------------------------------------------
+void print_array(Array *my_array){
+	int i;
+	
+	for(i=0; i<my_array->c_size; i++){
+		printf("%d ", *(my_array->array + i));
+	}
+	printf("\n");
 }

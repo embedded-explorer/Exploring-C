@@ -1,4 +1,4 @@
-
+/*
 //----------------------------------------------------------------------
 // Problem 1.
 //----------------------------------------------------------------------
@@ -361,3 +361,186 @@ Student_List *deallocate_list(Student_List *my_list){
 }
 
 //----------------------------------------------------------------------
+*/
+
+//----------------------------------------------------------------------
+// Problem 2.
+//----------------------------------------------------------------------
+#include <stdlib.h>
+#include <stdio.h>
+#include "list.h"
+
+//--------------------------------------------------------------
+// Function to Initialize the List
+// @param : 
+// @return: List Pointer
+//--------------------------------------------------------------
+List *initialize_list(){
+
+	List *my_list;
+    
+    // Allocate memory for list
+	my_list = (List *)malloc(sizeof(List));
+    
+    // Memory allocation failed
+	if(my_list == NULL)
+		return NULL;
+
+	my_list->count = 0;
+	my_list->head = NULL;
+	my_list->tail = NULL;
+
+	return my_list;
+}
+
+//--------------------------------------------------------------
+// Function to Create New Node
+// @param : Participant Details
+// @return: Node Pointer
+//--------------------------------------------------------------
+Node *create_node(Participant details){
+	Node *new_node;
+	static int reg_no; // Registration Number
+    
+    // Allocate Memory for Node
+	new_node = (Node *)malloc(sizeof(Node));
+  
+    if(new_node == NULL)
+		return NULL;
+    
+	new_node->participant = details;
+	new_node->participant.reg_no = ++reg_no; // Insert Registration Number
+	new_node->ptr = NULL;
+
+	return new_node;
+}
+
+//--------------------------------------------------------------
+// Function to search participant by Aaadhaar Number
+// @param : List Pointer
+// @param : long int Aadhaar Number
+// @return: Node Pointer
+//--------------------------------------------------------------
+int serch_for_participant(List *my_list, long int aadhaar_num){
+    Node *temp;
+
+    temp = my_list->head;
+    while(temp != NULL){
+    	if(temp->participant.aadhaar_num == aadhaar_num)
+    		return SUCCESS;
+    	temp = temp->ptr;
+    }
+
+    return FAILURE;
+
+}
+
+//--------------------------------------------------------------
+// Function to rgister for course
+// @param : List Pointer
+// @param : Participant participant details
+// @return: int Status
+//--------------------------------------------------------------
+int register_for_course(List *my_list, Participant participant){
+    Node *new_node;
+    
+    // Check if participant is already registered
+    if(serch_for_participant(my_list, participant.aadhaar_num)){
+	  return FAILURE;
+    }
+    
+    // Create Node for participant
+    new_node = create_node(participant);
+    
+    // If Participant creation fails
+    if(new_node == NULL)
+    	return FAILURE;
+    
+    // Insert at beginning
+    if(my_list->count == 0){
+    // When list is empty update both head and tail
+    	my_list->head = new_node;
+    	my_list->tail = new_node;
+    }
+    else{
+    // Add new participant node and update head
+        new_node->ptr = my_list->head;
+        my_list->head = new_node;
+    }
+    
+    // Increment Count
+    my_list->count ++;
+
+    return SUCCESS;
+}
+
+//--------------------------------------------------------------
+// Function to print number of participants in each level
+// @param : List Pointer
+// @return:
+//--------------------------------------------------------------
+void get_no_of_participants(List *my_list){
+	Node *temp;
+	int beg_count, int_count, exp_count;
+
+	temp = my_list->head;
+	while(temp != NULL){
+        if(temp->participant.level == Beginner){
+        	beg_count++;
+        }
+        else if(temp->participant.level == Intermediate){
+            int_count++;
+        }
+        else{
+            exp_count++;
+        }
+        temp = temp->ptr;
+	}
+    
+    printf("Number of Participants Registered for Course\n");
+	printf("Beginner    : %d\n", beg_count);
+	printf("Intermediate: %d\n", int_count);
+	printf("Expert      : %d\n", exp_count);
+	printf("\n");
+}
+
+//--------------------------------------------------------------
+// Function to print entire list
+// @param : List Pointer
+// @return:
+//--------------------------------------------------------------
+void print_participant_list(List *my_list){
+    Node *temp;
+    char *level_name[] = {"Beginner", "Intermediate", "Expert"};
+
+    temp = my_list->head;
+    while(temp != NULL){
+    	printf("Name               : %s\n", temp->participant.name);
+    	printf("Aadhaar Number     : %ld\n", temp->participant.aadhaar_num);
+    	printf("Registration Number: %d\n", temp->participant.reg_no);
+    	printf("Level              : %s\n", level_name[temp->participant.level]);
+    	printf("\n");
+    	temp = temp->ptr;
+    }
+}
+
+//--------------------------------------------------------------
+// Function to deallocate memory
+// @param : List Pointer
+// @return: List Pointer NULL
+//--------------------------------------------------------------
+List *deallocate_memory(List *my_list){
+	Node *temp;
+    
+    // Free each node
+	while(my_list->head != NULL){
+		temp = my_list->head;
+		my_list->head = temp->ptr;
+		free(temp);
+	}
+    
+    // Free list
+	free(my_list);
+
+	return NULL;
+}

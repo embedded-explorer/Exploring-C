@@ -1,3 +1,7 @@
+/*
+//----------------------------------------------------------------------
+// Problem 1. 
+//----------------------------------------------------------------------
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
@@ -5,11 +9,6 @@
 #include "problems.h"
 
 int main(){
-
-
-//----------------------------------------------------------------------
-// Problem 1. 
-//----------------------------------------------------------------------
     Student_List *test_list;
 	Student student_1, student_2, student_3, student_4;
     
@@ -106,4 +105,53 @@ int main(){
 	assert(deallocate_list(test_list) == NULL);
 	
     return 0;
+}
+*/
+
+//----------------------------------------------------------------------
+// Problem 2. 
+//----------------------------------------------------------------------
+#include <stdlib.h>
+#include <assert.h>
+#include "list.h"
+
+int main(){
+	List *test_list;
+    int i;
+    
+    // Participant Details
+	Participant details[6] = {{"Ramesh S", 223345687895, 0, Beginner},
+	                          {"Suresh", 223347898895, 0, Beginner},
+	                          {"Ramesh", 222845987635, 0, Intermediate},
+	                          {"Suresh", 223347898895, 0, Beginner},
+	                          {"Sheela", 123447898895, 0, Expert},
+	                          {"Jaya", 589635694568, 0, Intermediate}};
+    
+    // Test Initialize List
+	test_list = initialize_list();
+	assert(test_list != NULL);
+	assert(test_list->head == NULL && test_list->tail == NULL);
+    
+    // Test Register for Course Function
+	assert(register_for_course(test_list, details[0]) == SUCCESS);
+	assert(register_for_course(test_list, details[1]) == SUCCESS);
+	assert(register_for_course(test_list, details[2]) == SUCCESS);
+	assert(test_list->count == 3);
+	assert(register_for_course(test_list, details[3]) == FAILURE); // Duplicate Entry
+	assert(test_list->count == 3);
+	assert(register_for_course(test_list, details[4]) == SUCCESS);
+	assert(register_for_course(test_list, details[5]) == SUCCESS);
+	assert(test_list->count == 5);
+    
+    // Test get number of participants
+	get_no_of_participants(test_list);
+    
+    // Test print participant list
+	print_participant_list(test_list);
+    
+    // Test deallocate memory function
+	test_list = deallocate_memory(test_list);
+	assert(test_list == NULL);
+
+	return 0;
 }

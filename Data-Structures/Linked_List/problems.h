@@ -1,4 +1,4 @@
-
+/*
 //----------------------------------------------------------------------
 // Problem 1. 
 // Write program to store student details in a data structure. Carry out 
@@ -95,3 +95,61 @@ void print_transaction_log(Student_List *my_list);
 
 // Function to deallocate list
 Student_List *deallocate_list(Student_List *my_list);
+*/
+
+// --------------------------------------------------------------
+// Problem 2.
+// The X Institute offers a online course on MEMS Technology
+// Course is offered in Beginner, Intermediate and Expert Levels
+// The participant can register in either of one level of course
+// Ensure that all the participants are unique. Count number of 
+// registration in beginner, intermediate and expert levels.
+// Deallocate all the memory before exiting the program
+// --------------------------------------------------------------
+
+#define SUCCESS 1
+#define FAILURE 0
+
+#define NAME_SIZE 20
+
+// Datatype for course level
+typedef enum{Beginner, Intermediate, Expert} Level;
+
+// Structure definition for storing participant details
+typedef struct _participant_ Participant;
+struct _participant_{
+    char name[NAME_SIZE]; // Participant Name
+    long int aadhaar_num; // Aadhaar Number
+	int reg_no;           // Registration Number
+	Level level;          // Level of Course
+};
+
+// Structure definition of Node
+typedef struct _node_ Node;
+struct _node_{
+	Participant participant;
+	Node *ptr;
+};
+
+// Structure definition of List
+typedef struct _list_ List;
+struct _list_{
+	int count;
+    Node *head;
+    Node *tail;
+};
+
+// Function to Initialize the List
+List *initialize_list();
+
+// Function to rgister for course
+int register_for_course(List *my_list, Participant participant);
+
+// Function to print number of participants in each level
+void get_no_of_participants(List *my_list);
+
+// Function to print entire list
+void print_participant_list(List *my_list);
+
+// Function to deallocate memory
+List *deallocate_memory(List *list);
