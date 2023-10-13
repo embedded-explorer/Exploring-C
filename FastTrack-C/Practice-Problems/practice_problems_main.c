@@ -571,38 +571,90 @@ int main(){
 	fclose(fptr);
 */
 
-/*
-// 60.
+// 60. Text Mode
     FILE *num_ptr;
     FILE *odd_ptr;
     FILE *evn_ptr;
 	
-	num_ptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/num_file.txt", "r");
-	odd_ptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/odd_file.txt", "w");
-	evn_ptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/evn_file.txt", "w");
+	num_ptr = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/num_file.txt", "r");
+	odd_ptr = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/odd_file.txt", "w");
+	evn_ptr = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/evn_file.txt", "w");
 	
     odd_even_sorting(num_ptr, evn_ptr, odd_ptr);
 	
 	fclose(num_ptr);
 	fclose(odd_ptr);
 	fclose(evn_ptr);
-*/
 
-
+/*
 // 61.
     FILE *fptr;
 	Contact contact_1 = {"Hrishikesh", "Bharathi Complex, Manipal", "7349493697"};
 	Contact contact_2 = {"Mother", "Iruvail, Moodbidri", "9902397988"};
 	Contact contact_3 = {"Father", "Sheshadripuram, Bangalore", "8105895176"};
+	Contact contact_4 = {"Hrishikesh", "MSIS, Manipal", "8345679876"};
 	
-	fptr = fopen("F:/C/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt", "r+");
+	fptr = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt", "r+");
 	
 	// Test add record
 	assert(add_record(fptr, &contact_1));
 	assert(add_record(fptr, &contact_2));
 	assert(add_record(fptr, &contact_3));
 	
+	// Test search record
+	search_record(fptr, "Mother");
+	search_record(fptr, "Hrishikesh");
+	search_record(fptr, "Father");
+	
+	// Test delete record
+	delete_record(fptr, "Mother");
+	fptr = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt", "r+");
+	
+	// Test search record
+	search_record(fptr, "Mother");
+	search_record(fptr, "Hrishikesh");
+	search_record(fptr, "Father");
+	
+	// Test modify record
+	edit_record(fptr, "Hrishikesh", &contact_4);
+	
 	fclose(fptr);
+*/
+
+/*
+// 62.
+    FILE *fptr;
+	Contact contact_1 = {"Hrishikesh", "Bharathi Complex, Manipal", "7349493697"};
+	Contact contact_2 = {"Mother", "Iruvail, Moodbidri", "9902397988"};
+	Contact contact_3 = {"Father", "Sheshadripuram, Bangalore", "8105895176"};
+	Contact contact_4 = {"Hrishikesh", "MSIS, Manipal", "8345679876"};
+	
+	fptr = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt", "rb+");
+	
+	// Test add record
+	assert(add_record(fptr, &contact_1));
+	assert(add_record(fptr, &contact_2));
+	assert(add_record(fptr, &contact_3));
+	
+	// Test search record
+	search_record(fptr, "Mother");
+	search_record(fptr, "Hrishikesh");
+	search_record(fptr, "Father");
+	
+	// Test delete record
+	delete_record(fptr, "Mother");
+	fptr = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt", "rb+");
+	
+	// Test search record
+	search_record(fptr, "Mother");
+	search_record(fptr, "Hrishikesh");
+	search_record(fptr, "Father");
+	
+	// Test modify record
+	edit_record(fptr, "Hrishikesh", &contact_4);
+	
+	fclose(fptr);
+*/
 
 	return 0;
 }

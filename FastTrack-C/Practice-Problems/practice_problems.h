@@ -331,6 +331,7 @@ int char_count_in_file(FILE *fptr);
 // single digit numbers.
 int odd_even_sorting(FILE *num_ptr, FILE *evn_ptr, FILE *odd_ptr);
 
+/*
 // 61. Write a program to create telephone directory. It should include Name, address and
 // telephone number. It should have facilities for adding, deleting, editing and searching
 // any number. Implement using text mode.
@@ -347,13 +348,37 @@ typedef struct _contact_ Contact;
 // Add record
 int add_record(FILE *fptr, Contact *contact);
 
+// Search record
+int search_record(FILE *fptr, const char *name);
+
 // Delete record
+int delete_record(FILE *fptr, const char *name);
 
 // Edit record
-
-// Search record
-int search_record(FILE *fptr, long int phone_no);
+int edit_record(FILE *fptr, const char *name, Contact *newContact);
+*/
 
 // 62. Write a program to create telephone directory. It should include Name, address and
 // telephone number. It should have facilities for adding, deleting, editing and searching
 // any number. Implement using binary mode.
+#define NAME_SIZE 20
+#define ADDR_SIZE 50
+
+struct _contact_{
+	char name[NAME_SIZE];
+	char addr[ADDR_SIZE];
+	char phone_no[10];
+};
+typedef struct _contact_ Contact;
+
+// Add record
+int add_record(FILE *fptr, Contact *contact);
+
+// Search record
+int search_record(FILE *fptr, const char *name);
+
+// Delete record
+int delete_record(FILE *fptr, const char *name);
+
+// Edit record
+int edit_record(FILE *fptr, const char *name, Contact *newContact);

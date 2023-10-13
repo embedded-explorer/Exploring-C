@@ -1086,7 +1086,7 @@ int char_count_in_file(FILE *fptr){
 	return 1; // Return Success
 }
 
-// 60.
+// 60. Text Mode
 int odd_even_sorting(FILE *num_ptr, FILE *evn_ptr, FILE *odd_ptr){
 	
 	char ch;
@@ -1116,6 +1116,7 @@ int odd_even_sorting(FILE *num_ptr, FILE *evn_ptr, FILE *odd_ptr){
 	return 1; // Return Success
 }
 
+/*
 // 61.
 // Add record
 int add_record(FILE *fptr, Contact *contact){
@@ -1124,6 +1125,249 @@ int add_record(FILE *fptr, Contact *contact){
 		return -1; // Return Failure
 	
 	fwrite(contact, sizeof(Contact), 1, fptr);
+	fputc('\n', fptr);
 	
 	return 1; // Return Success
+}
+
+// Search record
+int search_record(FILE *fptr, const char *name) {
+	char ch;
+	Contact contact;
+	
+    if (fptr == NULL || name == NULL) {
+        return -1; // Return Failure
+    }
+
+    fseek(fptr, 0, SEEK_SET); // Move to starting
+    
+    while(fread(&contact, sizeof(Contact), 1, fptr)) {
+        if (strcmp(contact.name, name) == 0) {
+            printf("Name: %s\nAddress: %s\nPhone Number: %s\n\n", contact.name, contact.addr, contact.phone_no);
+            return 1; // Record found
+        }
+		
+		// Skip new line
+		while((ch = fgetc(fptr)) != EOF && ch != '\n')
+		{
+		}
+    }
+
+    printf("Record not found.\n");
+    return 0; // Record not found
+}
+
+// Delete record
+int delete_record(FILE *fptr, const char *name) {
+	char ch;
+	Contact contact;
+	
+    if (fptr == NULL || name == NULL) {
+        return -1; // Return Failure
+    }
+
+    FILE *tempFile;
+    tempFile = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/temp_directory.txt", "w"); // Temporary file
+
+    if (tempFile == NULL) {
+        printf("Error creating the temporary file.\n");
+        return -1; // Return Failure
+    }
+
+    fseek(fptr, 0, SEEK_SET); // Move to starting
+
+    while (fread(&contact, sizeof(Contact), 1, fptr)) {
+        if (strcmp(contact.name, name) != 0) {
+            // Write the record to the temporary file
+            fwrite(&contact, sizeof(Contact), 1, tempFile);
+            fputc('\n', tempFile);
+        }
+		// Skip new line
+		while((ch = fgetc(fptr)) != EOF && ch != '\n')
+		{
+		}
+    }
+
+    fclose(fptr);
+    fclose(tempFile);
+
+    // Replace the original file with the temporary file
+    remove("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt");
+    rename("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/temp_directory.txt", \
+           "F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt");
+
+    return 0; // Return Success
+}
+
+// Edit record
+int edit_record(FILE *fptr, const char *name, Contact *newContact) {
+	char ch;
+	Contact contact;
+	
+    if (fptr == NULL || name == NULL) {
+        return -1; // Return Failure
+    }
+
+    FILE *tempFile;
+    tempFile = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/temp_directory.txt", "w"); // Temporary file
+
+    if (tempFile == NULL) {
+        printf("Error creating the temporary file.\n");
+        return -1; // Return Failure
+    }
+	
+    fseek(fptr, 0, SEEK_SET); // Move to starting
+
+    while (fread(&contact, sizeof(Contact), 1, fptr)) {
+        if (strcmp(contact.name, name) == 0) {
+            fwrite(newContact, sizeof(Contact), 1, tempFile);
+            fputc('\n', tempFile);
+        }
+		else {
+			fwrite(&contact, sizeof(Contact), 1, tempFile);
+            fputc('\n', tempFile);
+		}
+		// Skip new line
+		while((ch = fgetc(fptr)) != EOF && ch != '\n')
+		{
+		}
+    }
+
+    fclose(fptr);
+    fclose(tempFile);
+
+    // Replace the original file with the temporary file
+    remove("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt");
+    rename("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/temp_directory.txt", \
+           "F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt");
+
+    return 0; // Return Success
+}
+*/
+
+// 61.
+// Add record
+int add_record(FILE *fptr, Contact *contact){
+	
+	if(fptr == NULL)
+		return -1; // Return Failure
+	
+	fwrite(contact, sizeof(Contact), 1, fptr);
+	fputc('\n', fptr);
+	
+	return 1; // Return Success
+}
+
+// Search record
+int search_record(FILE *fptr, const char *name) {
+	char ch;
+	Contact contact;
+	
+    if (fptr == NULL || name == NULL) {
+        return -1; // Return Failure
+    }
+
+    fseek(fptr, 0, SEEK_SET); // Move to starting
+    
+    while(fread(&contact, sizeof(Contact), 1, fptr)) {
+        if (strcmp(contact.name, name) == 0) {
+            printf("Name: %s\nAddress: %s\nPhone Number: %s\n\n", contact.name, contact.addr, contact.phone_no);
+            return 1; // Record found
+        }
+		
+		// Skip new line
+		while((ch = fgetc(fptr)) != EOF && ch != '\n')
+		{
+		}
+    }
+
+    printf("Record not found.\n");
+    return 0; // Record not found
+}
+
+// Delete record
+int delete_record(FILE *fptr, const char *name) {
+	char ch;
+	Contact contact;
+	
+    if (fptr == NULL || name == NULL) {
+        return -1; // Return Failure
+    }
+
+    FILE *tempFile;
+    tempFile = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/temp_directory.txt", "w"); // Temporary file
+
+    if (tempFile == NULL) {
+        printf("Error creating the temporary file.\n");
+        return -1; // Return Failure
+    }
+
+    fseek(fptr, 0, SEEK_SET); // Move to starting
+
+    while (fread(&contact, sizeof(Contact), 1, fptr)) {
+        if (strcmp(contact.name, name) != 0) {
+            // Write the record to the temporary file
+            fwrite(&contact, sizeof(Contact), 1, tempFile);
+            fputc('\n', tempFile);
+        }
+		// Skip new line
+		while((ch = fgetc(fptr)) != EOF && ch != '\n')
+		{
+		}
+    }
+
+    fclose(fptr);
+    fclose(tempFile);
+
+    // Replace the original file with the temporary file
+    remove("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt");
+    rename("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/temp_directory.txt", \
+           "F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt");
+
+    return 0; // Return Success
+}
+
+// Edit record
+int edit_record(FILE *fptr, const char *name, Contact *newContact) {
+	char ch;
+	Contact contact;
+	
+    if (fptr == NULL || name == NULL) {
+        return -1; // Return Failure
+    }
+
+    FILE *tempFile;
+    tempFile = fopen("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/temp_directory.txt", "w"); // Temporary file
+
+    if (tempFile == NULL) {
+        printf("Error creating the temporary file.\n");
+        return -1; // Return Failure
+    }
+	
+    fseek(fptr, 0, SEEK_SET); // Move to starting
+
+    while (fread(&contact, sizeof(Contact), 1, fptr)) {
+        if (strcmp(contact.name, name) == 0) {
+            fwrite(newContact, sizeof(Contact), 1, tempFile);
+            fputc('\n', tempFile);
+        }
+		else {
+			fwrite(&contact, sizeof(Contact), 1, tempFile);
+            fputc('\n', tempFile);
+		}
+		// Skip new line
+		while((ch = fgetc(fptr)) != EOF && ch != '\n')
+		{
+		}
+    }
+
+    fclose(fptr);
+    fclose(tempFile);
+
+    // Replace the original file with the temporary file
+    remove("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt");
+    rename("F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/temp_directory.txt", \
+           "F:/ME_VLSI/DS_LAB/Exploring-C/FastTrack-C/Practice-Problems/phone_directory.txt");
+
+    return 0; // Return Success
 }
