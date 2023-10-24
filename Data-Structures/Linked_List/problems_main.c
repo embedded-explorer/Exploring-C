@@ -108,6 +108,7 @@ int main(){
 }
 */
 
+/*
 //----------------------------------------------------------------------
 // Problem 2. 
 //----------------------------------------------------------------------
@@ -152,6 +153,66 @@ int main(){
     // Test deallocate memory function
 	test_list = deallocate_memory(test_list);
 	assert(test_list == NULL);
+
+	return 0;
+}
+*/
+
+//----------------------------------------------------------------------
+// Problem 3. 
+//----------------------------------------------------------------------
+#include <assert.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "problems.h"
+
+int main(){
+	List *test_list;
+
+	Details booking_details[9] = {{"Ramesh", 7896586952, "18Oct2023", full_day},
+                                  {"Suresh", 8356985623, "18Oct2023", morning},
+                                  {"Dinesh", 8956456231, "18Oct2023", evening},
+                                  {"Kunal", 9856239865, "19Oct2023", morning},
+                                  {"Akhil", 7563986523, "19Oct2023", full_day},
+                                  {"Dhanush", 8963562389, "19Oct2023", evening},
+                                  {"Vikram", 8963569870, "20Oct2023", evening},
+                                  {"Vijay", 9635698963, "20Oct2023", full_day},
+                                  {"Varun", 8963569635, "20Oct2023", morning}};
+    
+    // Initialize List
+	test_list = initialize_list();
+	assert(test_list != NULL);
+	assert(test_list->head == NULL && test_list->tail == NULL);
+	assert(test_list->count == 0);
+
+	// Test Booking Function
+	// 1. Booked for full day
+	assert(book_auditorium(test_list, booking_details[0]) == SUCCESS);
+	assert(book_auditorium(test_list, booking_details[1]) == FAILURE);
+	assert(book_auditorium(test_list, booking_details[2]) == FAILURE);
+	// 2. Booked for morning
+	assert(book_auditorium(test_list, booking_details[3]) == SUCCESS);
+	assert(book_auditorium(test_list, booking_details[4]) == FAILURE);
+	assert(book_auditorium(test_list, booking_details[5]) == SUCCESS);
+	// 3. Booked for evening
+	assert(book_auditorium(test_list, booking_details[6]) == SUCCESS);
+	assert(book_auditorium(test_list, booking_details[7]) == FAILURE);
+	assert(book_auditorium(test_list, booking_details[8]) == SUCCESS);
+
+	// Display Booking Status
+	show_details(test_list, booking_details[0].name);
+	show_details(test_list, booking_details[1].name);
+	show_details(test_list, booking_details[2].name);
+	show_details(test_list, booking_details[3].name);
+	show_details(test_list, booking_details[4].name);
+	show_details(test_list, booking_details[5].name);
+	show_details(test_list, booking_details[6].name);
+	show_details(test_list, booking_details[7].name);
+	show_details(test_list, booking_details[8].name);
+    
+    // Deallocate
+    test_list = deallocate_list(test_list);
+    assert(test_list == NULL);
 
 	return 0;
 }

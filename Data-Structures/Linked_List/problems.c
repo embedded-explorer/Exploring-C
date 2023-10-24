@@ -363,6 +363,7 @@ Student_List *deallocate_list(Student_List *my_list){
 //----------------------------------------------------------------------
 */
 
+/*
 //----------------------------------------------------------------------
 // Problem 2.
 //----------------------------------------------------------------------
@@ -540,6 +541,150 @@ List *deallocate_memory(List *my_list){
 	}
     
     // Free list
+	free(my_list);
+
+	return NULL;
+}
+*/
+
+//----------------------------------------------------------------------
+// Problem 3.
+//----------------------------------------------------------------------
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include "problems.h"
+
+// Function to initialize list
+List *initialize_list(){
+	List *my_list;
+
+	my_list = (List *)malloc(sizeof(List));
+
+	if(my_list == NULL)
+		return NULL; // Memory Allocation Failed
+
+	my_list->head = NULL;
+	my_list->tail = NULL;
+	my_list->count = 0;
+
+	return my_list;
+}
+
+// Function to create new node
+Node *create_node(Details details){
+    Node *new_node;
+
+    new_node = (Node *)malloc(sizeof(Node));
+
+    if(new_node == NULL)
+    	return NULL;
+
+    new_node->details = details;
+
+    // Add price
+    if(details.slot == full_day){
+        new_node->details.price = full_day_price;
+    }
+    else if(details.slot == morning){
+    	new_node->details.price = morning_price;
+    }
+    else{
+    	new_node->details.price = evening_price;
+    }
+
+    new_node->ptr = NULL;
+
+    return new_node;
+}
+
+// Function to check availability of slot
+int check_avilability(List *my_list, char *date, Slot slot){
+	Node *temp;
+
+	for(temp = my_list->head; temp != NULL; temp = temp->ptr){
+		if(!strcmp(temp->details.date, date)){
+		// When requested date is already booked
+			if(temp->details.slot == full_day){
+			// When slot is booked already for whole day
+				return FAILURE;
+			}
+			else if(temp->details.slot == morning){
+			// When slot is booked already for morning
+				if(slot == full_day || slot == morning){
+					return FAILURE;
+				}		
+			}
+			else{
+            // When slot is booked already for evening
+				if(slot == full_day || slot == evening){
+                    return FAILURE;
+				}
+			}
+		}
+	}
+
+	return SUCCESS;
+}
+
+// Function to book auditorium
+int book_auditorium(List *my_list, Details details){
+	Node *new_node;
+    
+    // Check Slot avilability
+    if(!check_avilability(my_list, details.date, details.slot))
+    	return FAILURE;
+
+    // Book slot
+	new_node = create_node(details);
+
+	if(new_node == NULL)
+		return FAILURE;
+
+	if(my_list->count == 0){
+		my_list->head = new_node;
+		my_list->tail = new_node;
+	}
+	else{
+		new_node->ptr = my_list->head;
+		my_list->head = new_node;
+	}
+
+	my_list->count ++;
+
+	return SUCCESS;
+}
+
+// Function to show details
+void show_details(List *my_list, char *name){
+	Node *temp;
+	char *slot_name[] = {"Full Day", "Morning", "Evening"};
+
+	for(temp = my_list->head; temp != NULL; temp = temp->ptr){
+		if(!strcmp(temp->details.name, name)){
+			printf("\nSlot Booked Successfully\n");
+			printf("Name : %s\n", temp->details.name);
+			printf("Name : %ld\n", temp->details.phone_no);
+			printf("Name : %s\n", temp->details.date);
+			printf("Name : %s\n", slot_name[temp->details.slot]);
+			printf("Name : %d\n", temp->details.price);
+			return;
+		}
+	}
+
+	printf("\nSlot is not booked\n");
+}
+
+// Function to deallocate list
+List *deallocate_list(List *my_list){
+	Node *temp;
+
+	while(my_list->head->ptr != NULL){
+        temp = my_list->head;
+        my_list->head = temp->ptr;
+        free(temp);
+	}
+
 	free(my_list);
 
 	return NULL;

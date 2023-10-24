@@ -97,6 +97,7 @@ void print_transaction_log(Student_List *my_list);
 Student_List *deallocate_list(Student_List *my_list);
 */
 
+/*
 // --------------------------------------------------------------
 // Problem 2.
 // The X Institute offers a online course on MEMS Technology
@@ -153,3 +154,60 @@ void print_participant_list(List *my_list);
 
 // Function to deallocate memory
 List *deallocate_memory(List *list);
+*/
+
+//----------------------------------------------------------------------
+// Problem 3.
+// Auditorium X Allows to book the place online, the customer can book,
+// the place for he whole day or till noon, or for the evening, for the
+// It charges 70,000, Till noon 50,000 and for evening 30,000, ensure
+// that no two customers can book the same slot on given date.
+//----------------------------------------------------------------------
+#define SUCCESS 1
+#define FAILURE 0
+
+#define NAME_SIZE 20
+#define DATE_SIZE 10
+
+// Datatype for slot
+typedef enum {full_day, morning, evening} Slot;
+
+// Datatype for slot price
+typedef enum {full_day_price = 80000, morning_price = 50000, evening_price = 30000} Price;
+
+// Structure definition of details
+typedef struct _details_ Details;
+struct _details_{
+    char name[NAME_SIZE];
+    long int phone_no;
+    char date[DATE_SIZE];
+    Slot slot;
+    Price price;
+};
+
+// Structure definition of node
+typedef struct _node_ Node;
+struct _node_{
+    Details details;
+    Node *ptr;
+};
+
+// Structure definition of List
+typedef struct _list_ List;
+struct _list_{
+    int count;
+    Node *head;
+    Node *tail;
+};
+
+// Function to initialize list
+List *initialize_list();
+
+// Function to book auditorium
+int book_auditorium(List *my_list, Details details);
+
+// Function to show details
+void show_details(List *my_list, char *name);
+
+// Function to deallocate list
+List *deallocate_list(List *my_list);
