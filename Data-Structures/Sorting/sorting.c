@@ -59,7 +59,7 @@ void insertion_sort(int arr[], int arr_size){
 	for(i=1; i<arr_size; i++){
 		key = arr[i]; // Select Key Element
 		
-		// Shift sorted list to make space for key element
+		// Shift unsorted list to make space for key element
 		for(j=i-1; (j>=0)&&(arr[j]>key); j--){
 			arr[j+1] = arr[j];
 		}
