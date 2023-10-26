@@ -156,6 +156,7 @@ void print_participant_list(List *my_list);
 List *deallocate_memory(List *list);
 */
 
+/*
 //----------------------------------------------------------------------
 // Problem 3.
 // Auditorium X Allows to book the place online, the customer can book,
@@ -211,3 +212,47 @@ void show_details(List *my_list, char *name);
 
 // Function to deallocate list
 List *deallocate_list(List *my_list);
+*/
+
+//----------------------------------------------------------------------
+// Problem 4.
+// Knapsack Problem
+//----------------------------------------------------------------------
+#define SUCCESS 1
+#define FAILURE 0
+
+// Structure definition of object
+typedef struct _object_ Object;
+struct _object_{
+    float profit;
+    float weight;
+    float ratio;
+    float fraction;
+};
+
+// Structure definition of node
+typedef struct _node_ Node;
+struct _node_{
+    Object object;
+    Node *ptr;
+};
+
+// Structure definition of List
+typedef struct _list_ List;
+struct _list_{
+    float t_weight; // Capacity of bag
+	float a_weight; // Available space
+    Node *ptr;
+};
+
+// Function to initialize list
+List *initialize_list(float capacity);
+
+// Function to insert new object to list
+int insert_object(List *my_list, float profit, float weight);
+
+// Function to Select_objects, returns profit
+float select_objects(List *my_list);
+
+// Function to Print List
+void print_list(List *my_list);

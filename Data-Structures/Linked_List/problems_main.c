@@ -158,6 +158,7 @@ int main(){
 }
 */
 
+/*
 //----------------------------------------------------------------------
 // Problem 3. 
 //----------------------------------------------------------------------
@@ -213,6 +214,42 @@ int main(){
     // Deallocate
     test_list = deallocate_list(test_list);
     assert(test_list == NULL);
+
+	return 0;
+}
+*/
+
+//----------------------------------------------------------------------
+// Problem 4.
+//----------------------------------------------------------------------
+
+#include <assert.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "problems.h"
+
+int main(){
+    
+    List *my_list;
+
+    // Test Initialize Function
+    my_list = initialize_list(50);
+    assert(my_list != NULL);
+
+    // Test insert function
+    assert(insert_object(my_list, 30, 15) == SUCCESS);
+    assert(insert_object(my_list, 20, 13) == SUCCESS);
+    assert(insert_object(my_list, 25, 18) == SUCCESS);
+    assert(insert_object(my_list, 15, 9) == SUCCESS);
+
+    print_list(my_list);
+	printf("\n");
+	
+	// Test selection function
+	printf("Profit = %f\n", select_objects(my_list));
+	
+	printf("\n");
+	print_list(my_list);
 
 	return 0;
 }

@@ -547,6 +547,7 @@ List *deallocate_memory(List *my_list){
 }
 */
 
+/*
 //----------------------------------------------------------------------
 // Problem 3.
 //----------------------------------------------------------------------
@@ -688,4 +689,131 @@ List *deallocate_list(List *my_list){
 	free(my_list);
 
 	return NULL;
+}
+*/
+
+//----------------------------------------------------------------------
+// Problem 4.
+//----------------------------------------------------------------------
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include "problems.h"
+
+// Function to initialize list
+List *initialize_list(float capacity){
+	List *my_list;
+
+	my_list = (List *)malloc(sizeof(List));
+
+	if(my_list == NULL)
+		return NULL; // Memory Allocation Failed
+
+	my_list->ptr = NULL;
+	my_list->t_weight = capacity;
+	my_list->a_weight = my_list->t_weight;
+
+	return my_list;
+}
+
+// Function to create new node
+Node *create_node(float profit, float weight, float ratio){
+	Node *new_node;
+
+	new_node = (Node *)malloc(sizeof(Node));
+
+	if(new_node == NULL)
+		return NULL;
+
+	new_node->object.profit = profit;
+	new_node->object.weight = weight;
+	new_node->object.ratio = ratio;
+	new_node->object.fraction = 0;
+	new_node->ptr = NULL;
+
+	return new_node;
+}
+
+// Function to insert new object to list
+int insert_object(List *my_list, float profit, float weight){
+	float ratio;
+	Node *new_node;
+    Node *temp, *prev;
+    
+    ratio = profit/weight;
+	new_node = create_node(profit, weight, ratio);
+
+	if(new_node == NULL)
+		return FAILURE;
+
+	if(my_list->ptr == NULL){
+	// Inserting First Object
+		my_list->ptr = new_node;
+	}
+	else{
+	// Inserting next objects by sorting ratio in descending order
+        prev = NULL;
+        temp = my_list->ptr;
+        
+        // Iterate through list until ratio is greater
+        while((temp != NULL) && (temp->object.ratio > ratio)){
+        	prev = temp;
+        	temp = temp->ptr;
+        }
+
+        if(prev == NULL){
+        // Insert at starting
+        	new_node->ptr = my_list->ptr;
+        	my_list->ptr = new_node;
+        }
+        else if(temp == NULL){
+        // Insert at end
+        	prev->ptr = new_node;
+        }
+        else{
+        // Insert in between
+        	new_node->ptr = temp;
+        	prev->ptr = new_node;
+        }
+	}
+
+	return SUCCESS;
+
+}
+
+// Function to Select_objects, returns weight occupied
+float select_objects(List *my_list){
+    Node *temp;
+	float profit = 0;
+
+	temp = my_list->ptr;
+	
+	// When space is available in bag
+	while((temp != NULL) && (my_list->a_weight > 0)){
+		if(my_list->a_weight > temp->object.weight){
+		// Space available is greater than weight of object
+		    temp->object.fraction = 1;
+			my_list->a_weight -= temp->object.weight;
+		}
+		else{
+			temp->object.fraction = my_list->a_weight/temp->object.weight;
+			my_list->a_weight -= my_list->a_weight;
+		}
+		profit += temp->object.fraction * temp->object.profit;
+		temp = temp->ptr;
+	}
+	
+	return profit;
+}
+
+// Function to Print List
+void print_list(List *my_list){
+	Node *temp;
+
+	for(temp = my_list->ptr; temp != NULL; temp = temp->ptr){
+        printf("%f ", temp->object.profit);
+        printf("%f ", temp->object.weight);
+        printf("%f ", temp->object.ratio);
+        printf("%f\n", temp->object.fraction);
+	}
 }
